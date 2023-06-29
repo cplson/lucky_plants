@@ -1,4 +1,8 @@
 export type Link = {
-    path: String,
-    text: String
+    path: string
+    text: string
+}
+
+export type LinkProps = {
+    link: Link
 }

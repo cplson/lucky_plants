@@ -3,18 +3,24 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
+import { LinkProps } from "@/lib/types";
 
-const NavLink = ({ link }) => {
+// Each Navigation Link is returned from here
+// we use usePathname to determine if this is the Link that is active
+const NavLink: React.FC<LinkProps> = ({ link }) => {
   const pathname = usePathname();
   let isActive = false;
 
+  // determine if this link is active
   if (pathname === link.path) {
     isActive = true;
   }
 
   return (
     <Link href={link.path} className="mx-2">
-      <span className={clsx('text-lg', isActive && 'stroke-green-700')}>{link.text}</span>
+      <li className={clsx("text-lg", isActive && "stroke-green-700")}>
+        {link.text}
+      </li>
     </Link>
   );
 };

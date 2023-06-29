@@ -1,19 +1,19 @@
 import NavBar from "@/components/NavBar";
 import "./globals.css";
-import { Inter, Roboto_Serif } from "next/font/google";
+import { Inter, Cormorant } from "next/font/google";
 import Socials from "@/components/Socials";
 import Cart from "@/components/Cart";
-import Link from "next";
+import Link from "next/link";
 
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
 });
-const roboto = Roboto_Serif({
+const cormorant = Cormorant({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-roboto",
+  variable: "--font-cormorant",
 });
 
 export const metadata = {
@@ -27,11 +27,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${roboto.variable} ${inter.variable}`}>
-      <body className="h-screen w-screen p-8">
+    <html lang="en" className={`${cormorant.variable} ${inter.variable}`}>
+      <body className="h-screen w-screen p-8 font-sans">
         {/* TOP MENU */}
-        <div className="grid grid-cols-3 place-content-between">
-          <h1 className="font-serif">Lucky</h1>
+        <div className="grid no-wrap grid-cols-3 place-content-between items-center">
+          <Link href='/home' ><h1 className="font-serif text-4xl">Lucky</h1></Link>
           {/* NAVIGATION */}
 
           <NavBar />
@@ -40,7 +40,7 @@ export default function RootLayout({
             <Socials />
 
             {/* CART */}
-            <Cart />
+            <Link href='/cart'><Cart /></Link>
           </div>
         </div>
         {children}

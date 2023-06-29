@@ -9,7 +9,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ["var(--font-inter)"],
-        serif: ["var(--font-roboto)"]
+        serif: ["var(--font-cormorant)"]
       },
       fontSize: {
       sm: '0.8rem',
