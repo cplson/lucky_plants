@@ -34,3 +34,10 @@ export type User = {
     email: string
     password: string
 }
+
+export type Product = {
+    id: string;
+    name: string;
+    price: number;
+    stock: number;
+}
