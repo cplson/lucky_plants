@@ -50,6 +50,7 @@ model Cart {
 model Product {
   id String @id @default(uuid())
   name String @unique
-  price Decimal
+  price Float
   stock Int
+  url String
 }
