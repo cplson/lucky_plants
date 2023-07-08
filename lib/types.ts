@@ -22,3 +22,15 @@ export type CardProps = {
 export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
     className?: string
 }
+
+export type NewUser = {
+    firstName: string
+    lastName: string
+    email: string
+    password: string
+}
+
+export type User = {
+    email: string
+    password: string
+}

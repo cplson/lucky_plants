@@ -4,8 +4,8 @@ import Button from "@/components/Button";
 import Card from "./Card";
 import Input from "./Input";
 import { useRouter } from "next/navigation";
-// import { register, signin } from '@/lib/api';
-import { useCallback, useState, MouseEvent } from "react";
+import { register, signin } from '@/lib/api';
+import { useCallback, useState } from "react";
 import Link from "next/link";
 
 // Content for register page
@@ -140,7 +140,7 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
               </span>
             </div>
             <div>
-              <Button type="submit" intent="secondary">
+              <Button intent="secondary">
                 {content.buttonText}
               </Button>
             </div>
