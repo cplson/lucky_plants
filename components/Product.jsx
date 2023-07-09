@@ -1,25 +1,22 @@
-import { Product as ProductType } from "@/lib/types";
 import Image from "next/image";
+import Button from "./Button";
+import Card from "./Card";
 
 export default function Product({ product }) {
   console.log(product.url);
   return (
-    <div className="grid-element">
-      <div
-        className="relative h-200 w-200"
-        style={{ height: "300px", width: "300px" }}
-      >
+    <div className="flex flex-col items-center gap-2 my-8">
+    <h2 className="text-xl font-semibold text-stone-700 tracking-wide">{product.name}</h2>
+      <div className="relative" style={{ height: "200px", width: "200px" }}>
         <Image
           className="object-cover rounded-lg"
           src={product.url}
           fill
-          //   sizes="(max-width: 1200px) 20vw, 20vw"
           alt={product.name}
         />
-      </div>
-      <p className="text-lg">{product.name}</p>
-      <p>${product.price}</p>
-      {product.stock > 0 ? <p>Stock: {product.stock}</p> : <p>Sold Out</p>}
+      </div>       
+        <p className="text-xl font-medium text-stone-500 tracking-wide"><span className="font-normal mr-1">$</span>{product.price}</p>
+        {product.stock > 0 ? <Button >Add to Cart</Button> : <p className="text-3xl font-bold text-amber-700">Sold Out</p> }
     </div>
   );
 }
