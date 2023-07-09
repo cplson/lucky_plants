@@ -1,5 +1,6 @@
 import { Link } from "@/lib/types";
 import NavLink from "@/components/NavLink";
+import clsx from "clsx";
 
 const links: Link[] = [
   { text: "Shop", path: "/shop" },
@@ -10,11 +11,13 @@ const links: Link[] = [
 
 export default function NavBar() {
   return (
+    <>
     <ul className="flex flex-nowrap items-center">
       {links.map((link) => {
         console.log(link);
-        return <NavLink link={link} />;
+        return <li className={"text-lg"}><NavLink link={link} /></li>;
       })}
     </ul>
+      </>
   );
 }

@@ -21,6 +21,24 @@ module.exports = {
       '5xl': '3.052rem'
     }
     },
+    screens: {
+      'sm': '640px',
+      // => @media (min-width: 640px) { ... }
+
+      'md': '740px',
+      // => @media (min-width: 740px) { ... }
+
+      'lg': '845px',
+      
+      'xl': '1040px',
+      // => @media (min-width: 1040px) { ... }
+
+      '2xl': '1340px',
+      // => @media (min-width: 1340px) { ... }
+
+      '3xl': '1536px',
+      // => @media (min-width: 1536px) { ... }
+    }
   },
   plugins: [],
 }

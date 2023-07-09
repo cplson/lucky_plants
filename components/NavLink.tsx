@@ -19,10 +19,8 @@ const NavLink: FC<LinkProps> = ({ link }) => {
   }
 
   return (
-    <Link href={link.path} className="mx-2">
-      <li className={clsx("text-lg", isActive && "stroke-green-700")}>
+    <Link href={link.path} className={clsx("mx-2", isActive && "stroke-green-100 border-black", link.text == 'Shop' && "shrink")}>  
         {link.text}
-      </li>
     </Link>
   );
 };
