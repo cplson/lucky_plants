@@ -4,7 +4,7 @@ export default async function ProductList() {
   const products = await getProducts();
   return (
     
-      <div className="grid grid-cols-4 gap-2">
+      <div className="grid grid-cols-3 gap-2">
         {products.map((product) => {
           return (
             <div>
