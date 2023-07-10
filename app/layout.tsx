@@ -4,7 +4,6 @@ import { Inter, Cormorant } from "next/font/google";
 import Socials from "@/components/Socials";
 import Cart from "@/components/Cart";
 import Link from "next/link";
-import clsx from "clsx";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -28,17 +27,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${inter.variable}`}>
-      <body className=" p-8 font-sans bg-gradient-to-r from-lime-100 to-green-100">
+    <html lang="en" id='root' className={`${cormorant.variable} ${inter.variable}`}>
+      <body className="flex-column justify-center p-8 font-sans bg-gradient-to-r from-lime-100 to-green-100  max-w-7xl">
         {/* TOP MENU */}
-        {/* <div className={clsx("grid no-wrap grid-cols-5 items-center lg:grid-cols-3")}> */}
-        <div className={clsx("flex justify-between items-center")}>
+        <div className={"flex justify-between items-center"}>
 
           <Link href="/home" className=''>
-            <h1 className="font-serif text-4xl">Lucky</h1>
+            <h1 className="font-serif text-4xl font-semibold text-green-900">Lucky</h1>
           </Link>
           {/* NAVIGATION */}
-          {/* <div className="col-span-3 lg:col-span-1"> */}
           <div className="">
 
             <NavBar />
