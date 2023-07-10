@@ -3,9 +3,10 @@ import { FC } from "react";
 
 const buttonClasses = cva(
   [
+    "overflow-hidden",
     "active:scale-100",
     "transition",
-    "duration-200",
+    "duration-400",
     "ease-in-out",
   ],
   {
@@ -28,12 +29,13 @@ const buttonClasses = cva(
           "border-y-2",
           "border-black",
           "text-2xl",
-          "font-semibold"
+          "font-semibold",
+          "active:bg-sky-700/50"
         ],
         text: ["bg-transparent", "text-black", "hover:bg-gray-100"],
       },
       size: {
-        small: ["text-md", "py-1", "px-2"],
+        small: ["text-2xl", "px-4", "py-1"],
         medium: ["text-lg", "px-6", "py-2"],
         large: ["text-xlg", "px-8", "py-4"],
       },
