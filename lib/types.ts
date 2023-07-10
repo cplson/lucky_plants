@@ -23,6 +23,10 @@ export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
     className?: string
 }
 
+export type ProductProps = {
+    product: Product
+}
+
 export type NewUser = {
     firstName: string
     lastName: string
@@ -40,4 +44,5 @@ export type Product = {
     name: string;
     price: number;
     stock: number;
+    url: string;
 }

@@ -1,9 +1,9 @@
 import Image from "next/image";
-import Button from "./Button";
-import Card from "./Card";
+import { FC } from "react";
 import CartButton from "./CartButton";
+import { ProductProps } from "@/lib/types";
 
-export default function Product({ product }) {
+const Product: FC<ProductProps> = ({ product }) => {
   console.log(product.url);
   return (
     <div className="flex flex-col items-center gap-2 my-8">
@@ -23,10 +23,12 @@ export default function Product({ product }) {
         {product.price}
       </p>
       {product.stock > 0 ? (
-        <CartButton />
+        <CartButton product={product} />
       ) : (
         <p className="text-3xl font-bold text-amber-700">Sold Out</p>
       )}
     </div>
   );
 }
+
+export default Product;

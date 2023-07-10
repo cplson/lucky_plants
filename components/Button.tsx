@@ -3,8 +3,6 @@ import { FC } from "react";
 
 const buttonClasses = cva(
   [
-    "rounded-lg",
-    "hover:scale-110",
     "active:scale-100",
     "transition",
     "duration-200",
@@ -15,19 +13,22 @@ const buttonClasses = cva(
       intent: {
         primary: [
           "bg-green-700",
+          "rounded-lg",
+          "hover:scale-110",
           "text-white",
           "border-transparent",
           "hover:bg-green-600",
         ],
 
         secondary: [
-          "bg-white",
-          "text-black",
-          "border-gray-400",
-          "hover:bg-gray-100",
+          "bg-sky-500",
+          "text-white",
+          "hover:bg-sky-700",
           "border-solid",
-          "border-2",
-          "border-gray-800",
+          "border-y-2",
+          "border-black",
+          "text-2xl",
+          "font-semibold"
         ],
         text: ["bg-transparent", "text-black", "hover:bg-gray-100"],
       },
