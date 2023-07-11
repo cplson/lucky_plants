@@ -32,6 +32,19 @@ const buttonClasses = cva(
           "font-semibold",
           "active:bg-sky-700/50"
         ],
+        tertiary: [
+          "bg-slate-100",
+          "rounded-lg",
+          "hover:scale-110",
+          "text-black",
+          "border-black",
+          "border-2",
+          "font-semibold",
+          "scale-100",
+          "hover:scale-110",
+          "focus:scale-110",
+
+        ],
         text: ["bg-transparent", "text-black", "hover:bg-gray-100"],
       },
       size: {

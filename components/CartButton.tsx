@@ -39,7 +39,7 @@ const CartButton: FC<ProductProps> = ({ product }) => {
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <div className="flex flex-col items-center p-6">
+        <div className="flex flex-col items-center px-6">
           <h2 className="text-xl font-semibold text-stone-700 tracking-wide mb-4">
             {product.name}
           </h2>
