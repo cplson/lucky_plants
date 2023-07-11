@@ -14,7 +14,6 @@ export default function NavBar() {
     <>
     <ul className="flex flex-nowrap items-center">
       {links.map((link) => {
-        console.log(link);
         return <li className={"text-lg"}><NavLink link={link} /></li>;
       })}
     </ul>

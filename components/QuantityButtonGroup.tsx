@@ -1,8 +1,10 @@
-import { InputProps } from "@/lib/types";
-import { FC } from "react";
+import { ProductProps } from "@/lib/types";
+import { FC, useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
 
+// TODO: ON REGISTER, CREATE A NEW CART ROW FOR THAT USER
+// FIRST -> CREATE FETCH REQUEST TO GET CART DATA
 // 1. add state for quantity, and tie it to the input element
 // 2. create 2 functions
 //      -decrement quantity
@@ -10,10 +12,11 @@ import Button from "./Button";
 // 3. create api to update the cart
 // 4. create onClick handler to send a POST request
 
-// TODO: ON REGISTER, CREATE A NEW CART ROW FOR THAT USER
+
 
 // this will need to be changed to handle product prop
-const QuantityButtonGroup: FC<InputProps> = ({ ...props }) => {
+const QuantityButtonGroup: FC<ProductProps> = ({ product }) => {
+    // const [quantity, setQuantity] = useState()
   return (
     <>
       <div className="flex mb-8">

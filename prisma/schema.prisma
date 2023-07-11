@@ -31,20 +31,20 @@ model Cart {
   shopperId String
   shopper   User   @relation(fields: [shopperId], references: [id])
 
-  quantity_0 Int
-  quantity_1 Int
-  quantity_2 Int
-  quantity_3 Int
-  quantity_4 Int
-  quantity_5 Int
-  quantity_6 Int
-  quantity_7 Int
-  quantity_8 Int
-  quantity_9 Int
-  quantity_10 Int
-  quantity_11 Int
+  quantity_0 Int @default(0)
+  quantity_1 Int @default(0)
+  quantity_2 Int @default(0)
+  quantity_3 Int @default(0)
+  quantity_4 Int @default(0)
+  quantity_5 Int @default(0)
+  quantity_6 Int @default(0)
+  quantity_7 Int @default(0)
+  quantity_8 Int @default(0)
+  quantity_9 Int @default(0)
+  quantity_10 Int @default(0)
+  quantity_11 Int @default(0)
 
-  total Decimal
+  total Decimal @default(0)
 }
 
 model Product {

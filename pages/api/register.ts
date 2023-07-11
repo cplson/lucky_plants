@@ -26,10 +26,19 @@ export default async function register(
         maxAge: 60 * 60 * 24 * 7,
       })
     );
+    createUsersCart(user.id);
     res.status(201);
     res.json({});
   } else {
     res.status(402);
     res.json({});
   }
+}
+
+async function createUsersCart(id: string) {
+  await db.cart.create({
+    data: {
+      shopperId: id,
+    },
+  });
 }

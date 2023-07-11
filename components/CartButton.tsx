@@ -64,7 +64,7 @@ const CartButton: FC<ProductProps> = ({ product }) => {
               )}
             </p>
           </div>
-          <QuantityButtonGroup />
+          <QuantityButtonGroup product={product} />
         </div>
       </Modal>
     </div>
