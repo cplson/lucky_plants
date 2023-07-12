@@ -1,4 +1,5 @@
 import { ReactNode, InputHTMLAttributes } from "react"
+import { Cart as CartModel } from "@prisma/client"
 
 export type Link = {
     path: string
@@ -55,3 +56,5 @@ export type CartItem = {
     productId: string;
     cartId: string;
 }
+
+export type Cart = CartModel

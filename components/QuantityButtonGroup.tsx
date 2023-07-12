@@ -11,8 +11,8 @@ import { addItemToCart } from "@/lib/api";
 // 2. create 2 functions
 //      -decrement quantity                                     -X
 //      -increment quantity                                     -X
-// 3. create api to update the cart
-// 4. create onClick handler to send a POST request
+// 3. create api to update the cart                             
+// 4. create onClick handler to send a POST request             -x
 
 // this will need to be changed to handle product prop
 const QuantityButtonGroup: FC<ProductProps> = ({ product }) => {

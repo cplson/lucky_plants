@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 // import { db } from "@/lib/db";
-import {  getCart, authenticateUser } from "@/lib/dbhelpers"
+import {  getCart, authenticateUser, getItems } from "@/lib/dbHelpers"
 
 
 export default async function updateCart(
@@ -9,8 +9,6 @@ export default async function updateCart(
 ) {
   // POST
   if (req.method === "POST") {
-    // attempt to validate user web token,
-    // forbid access if the user cannot be validated
     try {
       // AUTHENTICATE USER
       const user = await authenticateUser(req);
@@ -24,16 +22,20 @@ export default async function updateCart(
         //       items will need to be created or deleted
         
         // GET CART
-        const Cart = await getCart(user);
-        console.log(Cart);
+        const cart = await getCart(user);
+        console.log(cart);
 
-        
+        // GET CART ITEMS
+        const items = await getItems(cart!.id, req.body.product.id);
+        console.log('number of items in cart', items.length);
+        console.log('newQuantity', req.body.quantity)
+        console.log(req.body);
       } catch (err) {
         console.log(err);
         res.status(500).json({})
       }
     } catch (err) {
-      res.status(403).json({})
+      res.status(403).json({message: 'username or password is incorrect'})
     }
 
     res.status(201).json({})

@@ -4,15 +4,14 @@ import { SignJWT, jwtVerify } from "jose";
 import { db } from "./db";
 import { User } from "./types";
 
-export const hashPassword = (password) => bcrypt.hash(password, 10);
+export const hashPassword = (password: string) => bcrypt.hash(password, 10);
 
 // compares the plain text pw with the hashed pw
 export const comparePasswords = (plainTextPassword: string, hashedPassword: string) =>
   bcrypt.compare(plainTextPassword, hashedPassword);
 
 // create a JWT
-export const createJWT = (user) => {
-  // return jwt.sign({ id: user.id }, 'cookies')
+export const createJWT = (user: User) => {
   const iat = Math.floor(Date.now() / 1000);
   const exp = iat + 60 * 60 * 24 * 7;
 

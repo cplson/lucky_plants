@@ -5,13 +5,23 @@ import { validateJWT } from "@/lib/auth";
 import { db } from "./db";
 
 export const authenticateUser = async (req: NextApiRequest) => {
-    return await validateJWT(req.cookies[process.env.COOKIE_NAME]);
-}
+  return await validateJWT(req.cookies[process.env.COOKIE_NAME]);
+};
 
 export const getCart = async (user: User) => {
-    return await db.cart.findMany({
-        where:{
-            shopperId: user.id
-        }
-    })
+  return await db.cart.findUnique({
+    where: {
+      shopperId: user.id,
+    },
+  });
+};
+
+export const getItems = async (cartId: string, productId: string) => {
+  console.log('inside getItems');
+  return await db.cartItem.findMany({
+    where:{
+      cartId: cartId,
+      productId: productId
+    }
+  })
 }
