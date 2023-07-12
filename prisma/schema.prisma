@@ -17,7 +17,7 @@ model User {
 
   firstName String
   lastName  String
-  email     String  @unique
+  email     String @unique
   password  String
 
   cart Cart?
@@ -28,27 +28,32 @@ model Cart {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  shopperId String  @unique
+  shopperId String @unique
   shopper   User   @relation(fields: [shopperId], references: [id])
 
-  quantity_0 Int @default(0)
-  quantity_1 Int @default(0)
-  quantity_2 Int @default(0)
-  quantity_3 Int @default(0)
-  quantity_4 Int @default(0)
-  quantity_5 Int @default(0)
-  quantity_6 Int @default(0)
-  quantity_7 Int @default(0)
-  quantity_8 Int @default(0)
-  quantity_9 Int @default(0)
-  quantity_10 Int @default(0)
-  quantity_11 Int @default(0)
+  items CartItem[]
+}
+
+model CartItem {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name  String
+  price Float
+
+  productId Int?
+  product   Product? @relation(fields: [name], references: [name])
+
+  Cart   Cart   @relation(fields: [cartId], references: [id])
+  cartId String
 }
 
 model Product {
-  id String @id @default(uuid())
-  name String @unique
-  price Float
-  stock Int
-  url String
+  id       String     @id @default(uuid())
+  name     String     @unique
+  price    Float
+  stock    Int
+  url      String
+  CartItem CartItem[]
 }
