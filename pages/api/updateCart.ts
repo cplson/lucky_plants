@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { db } from "@/lib/db";
-import { getUser } from "@/lib/user";
-import { User } from "@/lib/types";
+// import { db } from "@/lib/db";
+import {  getCart, authenticateUser } from "@/lib/dbhelpers"
+
 
 export default async function updateCart(
   req: NextApiRequest,
@@ -12,8 +12,8 @@ export default async function updateCart(
     // attempt to validate user web token,
     // forbid access if the user cannot be validated
     try {
-      // GET USER
-      const user = await getUser(req);
+      // AUTHENTICATE USER
+      const user = await authenticateUser(req);
       
       try {
         // 1. get the current quantity of this product that this user has 
@@ -22,10 +22,12 @@ export default async function updateCart(
         //       created or deleted
         //      -will probably require an if/else statement to determine if
         //       items will need to be created or deleted
-
+        
         // GET CART
+        const Cart = await getCart(user);
+        console.log(Cart);
 
-        // GET
+        
       } catch (err) {
         console.log(err);
         res.status(500).json({})

@@ -47,3 +47,11 @@ export type Product = {
     stock: number;
     url: string;
 }
+
+export type CartItem = {
+    id: string;
+    name: string;
+    price: number;
+    productId: string;
+    cartId: string;
+}

@@ -1,26 +1,32 @@
-'use client'
+"use client";
 import { ProductProps } from "@/lib/types";
 import { FC, useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
 import { addItemToCart } from "@/lib/api";
 
-
 // TODO: ON REGISTER, CREATE A NEW CART ROW FOR THAT USER       -X
 // FIRST -> CREATE FETCH REQUEST TO GET CART DATA
-// 1. add state for quantity, and tie it to the input element
+// 1. add state for quantity, and tie it to the input element   -X
 // 2. create 2 functions
-//      -decrement quantity
-//      -increment quantity
+//      -decrement quantity                                     -X
+//      -increment quantity                                     -X
 // 3. create api to update the cart
 // 4. create onClick handler to send a POST request
 
-
-
 // this will need to be changed to handle product prop
 const QuantityButtonGroup: FC<ProductProps> = ({ product }) => {
-    // const [quantity, setQuantity] = useState()
-    
+  const [quantity, setQuantity] = useState(0);
+
+  const increment = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const decrement = () => {
+    if (quantity > 0) {
+      setQuantity(quantity - 1);
+    }
+  };
   return (
     <>
       <div className="flex mb-8">
@@ -28,27 +34,34 @@ const QuantityButtonGroup: FC<ProductProps> = ({ product }) => {
           intent="secondary"
           size="small"
           className="rounded-l-xl border-l-2 px-4"
+          onClick={decrement}
         >
           -
         </Button>
-        <Input className="border-y-black border-x-0 text-center" disabled />
+        <Input
+          value={quantity}
+          className="border-y-black border-x-0 text-center"
+          disabled
+        />
         <Button
           intent="secondary"
           size="small"
           className="rounded-r-xl border-r-2 px-4"
+          onClick={increment}
         >
           +
         </Button>
       </div>
-      <Button onClick={getCart} intent="tertiary" className="">Confirm</Button>
+      <Button onClick={getCart} intent="tertiary" className="">
+        Confirm
+      </Button>
     </>
   );
 };
 
-async function getCart(){
-    
-    const result = await addItemToCart();
-    console.log('result of addItemToCart POST request:', result);
+async function getCart() {
+  const result = await addItemToCart();
+  console.log("result of addItemToCart POST request:", result);
 }
 
 export default QuantityButtonGroup;
