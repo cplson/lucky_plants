@@ -1,5 +1,5 @@
 "use client";
-import { ProductProps } from "@/lib/types";
+import { Product, ProductProps } from "@/lib/types";
 import { FC, useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
@@ -27,6 +27,11 @@ const QuantityButtonGroup: FC<ProductProps> = ({ product }) => {
       setQuantity(quantity - 1);
     }
   };
+
+  async function getCart(product: Product, quantity: number) {
+    const result = await addItemToCart({product, quantity});
+    console.log("result of addItemToCart POST request:", result);
+  }
   return (
     <>
       <div className="flex mb-8">
@@ -52,16 +57,13 @@ const QuantityButtonGroup: FC<ProductProps> = ({ product }) => {
           +
         </Button>
       </div>
-      <Button onClick={getCart} intent="tertiary" className="">
+      <Button onClick={() => getCart(product, quantity)} intent="tertiary" className="">
         Confirm
       </Button>
     </>
   );
 };
 
-async function getCart() {
-  const result = await addItemToCart();
-  console.log("result of addItemToCart POST request:", result);
-}
+
 
 export default QuantityButtonGroup;

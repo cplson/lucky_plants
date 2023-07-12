@@ -41,9 +41,9 @@ export const signin = (user: User) => {
     return fetcher({url: '/api/signin', method: 'post', body: user})
 }
 
-// export const addItemToCart = (data: ItemInfo) => {
-//     return fetcher({url: '/api/addItemToCart', method: 'post', body: data})
-// }
-export const addItemToCart = () => {
-    return fetcher({url: '/api/updateCart', method: 'post', body: {}})
+export const addItemToCart = (data: ItemInfo) => {
+    return fetcher({url: '/api/updateCart', method: 'post', body: data})
 }
+// export const addItemToCart = (product: Product) => {
+//     return fetcher({url: '/api/updateCart', method: 'post', body: product})
+// }
