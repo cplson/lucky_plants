@@ -8,7 +8,8 @@ import Image from "next/image";
 
 Modal.setAppElement("#root");
 
-const CartButton: FC<ProductProps> = ({ product }) => {
+
+const CartButton: FC<ProductProps> = ({ product}) => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const customStyles = {
     content: {

@@ -2,11 +2,12 @@ import bcrypt from "bcrypt";
 // jwt stands for json web token
 import { SignJWT, jwtVerify } from "jose";
 import { db } from "./db";
+import { User } from "./types";
 
 export const hashPassword = (password) => bcrypt.hash(password, 10);
 
 // compares the plain text pw with the hashed pw
-export const comparePasswords = (plainTextPassword, hashedPassword) =>
+export const comparePasswords = (plainTextPassword: string, hashedPassword: string) =>
   bcrypt.compare(plainTextPassword, hashedPassword);
 
 // create a JWT
@@ -24,13 +25,13 @@ export const createJWT = (user) => {
 };
 
 // validate JWT
-export const validateJWT = async (jwt) => {
+export const validateJWT = async (jwt: Uint8Array) => {
   const { payload } = await jwtVerify(
     jwt,
     new TextEncoder().encode(process.env.JWT_SECRET)
   );
 
-  return payload.payload as any;
+  return payload.payload as User;
 };
 
 // get JWT from cookies

@@ -1,11 +1,16 @@
 // Fetcher is our main API handler
-import { NewUser, User } from "./types"
+import { NewUser, Product, User } from "./types"
 import { FC } from "react"
+
+type ItemInfo = {
+    product: Product
+    quantity: number
+}
 
 type FetchData = {
     url: string
     method: string
-    body?: User | NewUser
+    body?: User | NewUser | ItemInfo | {}
     json?: boolean
 }
 export const fetcher: FC<FetchData> = async ({ url, method, body, json = true }) => {
@@ -34,4 +39,11 @@ export const register = (user: NewUser) => {
 
 export const signin = (user: User) => {
     return fetcher({url: '/api/signin', method: 'post', body: user})
+}
+
+// export const addItemToCart = (data: ItemInfo) => {
+//     return fetcher({url: '/api/addItemToCart', method: 'post', body: data})
+// }
+export const addItemToCart = () => {
+    return fetcher({url: '/api/updateCart', method: 'post', body: {}})
 }

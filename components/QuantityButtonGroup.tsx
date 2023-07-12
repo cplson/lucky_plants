@@ -1,9 +1,12 @@
+'use client'
 import { ProductProps } from "@/lib/types";
 import { FC, useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
+import { addItemToCart } from "@/lib/api";
 
-// TODO: ON REGISTER, CREATE A NEW CART ROW FOR THAT USER
+
+// TODO: ON REGISTER, CREATE A NEW CART ROW FOR THAT USER       -X
 // FIRST -> CREATE FETCH REQUEST TO GET CART DATA
 // 1. add state for quantity, and tie it to the input element
 // 2. create 2 functions
@@ -17,6 +20,7 @@ import Button from "./Button";
 // this will need to be changed to handle product prop
 const QuantityButtonGroup: FC<ProductProps> = ({ product }) => {
     // const [quantity, setQuantity] = useState()
+    
   return (
     <>
       <div className="flex mb-8">
@@ -36,9 +40,15 @@ const QuantityButtonGroup: FC<ProductProps> = ({ product }) => {
           +
         </Button>
       </div>
-      <Button intent="tertiary" className="">Confirm</Button>
+      <Button onClick={getCart} intent="tertiary" className="">Confirm</Button>
     </>
   );
 };
+
+async function getCart(){
+    
+    const result = await addItemToCart();
+    console.log('result of addItemToCart POST request:', result);
+}
 
 export default QuantityButtonGroup;

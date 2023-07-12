@@ -20,7 +20,7 @@ model User {
   email     String  @unique
   password  String
 
-  Cart Cart[]
+  cart Cart?
 }
 
 model Cart {
@@ -28,7 +28,7 @@ model Cart {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  shopperId String
+  shopperId String  @unique
   shopper   User   @relation(fields: [shopperId], references: [id])
 
   quantity_0 Int @default(0)
@@ -43,8 +43,6 @@ model Cart {
   quantity_9 Int @default(0)
   quantity_10 Int @default(0)
   quantity_11 Int @default(0)
-
-  total Decimal @default(0)
 }
 
 model Product {
