@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { db } from "@/lib/db";
-import { validateJWT } from "../../lib/auth";
+import { getUser } from "@/lib/user";
 import { User } from "@/lib/types";
 
 export default async function updateCart(
@@ -11,22 +11,21 @@ export default async function updateCart(
   if (req.method === "POST") {
     // attempt to validate user web token,
     // forbid access if the user cannot be validated
-    
     try {
-      const user = await validateJWT(req.cookies[process.env.COOKIE_NAME]);
-      console.log(user.id);
+      // GET USER
+      const user = await getUser(req);
+      
       try {
-        await db.cart.upsert({
-          where: {
-            shopperId: user.id
-          },
-          update: {
-            quantity_0: 2
-          },
-          create: {
-            shopperId: user.id
-          }
-        });
+        // 1. get the current quantity of this product that this user has 
+        //    in their cart. 
+        //      -that number will determine how many products will need to be 
+        //       created or deleted
+        //      -will probably require an if/else statement to determine if
+        //       items will need to be created or deleted
+
+        // GET CART
+
+        // GET
       } catch (err) {
         console.log(err);
         res.status(500).json({})
