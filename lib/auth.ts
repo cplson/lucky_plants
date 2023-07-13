@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import { SignJWT, jwtVerify } from "jose";
 import { db } from "./db";
 import { User } from "./types";
+import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
 export const hashPassword = (password: string) => bcrypt.hash(password, 10);
 
@@ -24,7 +25,7 @@ export const createJWT = (user: User) => {
 };
 
 // validate JWT
-export const validateJWT = async (jwt: Uint8Array) => {
+export const validateJWT = async (jwt) => {
   const { payload } = await jwtVerify(
     jwt,
     new TextEncoder().encode(process.env.JWT_SECRET)

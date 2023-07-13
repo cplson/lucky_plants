@@ -9,7 +9,7 @@ import Image from "next/image";
 Modal.setAppElement("#root");
 
 
-const CartButton: FC<ProductProps> = ({ product}) => {
+const CartButton: FC<ProductProps> = ({ product, count}) => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const customStyles = {
     content: {
@@ -65,7 +65,7 @@ const CartButton: FC<ProductProps> = ({ product}) => {
               )}
             </p>
           </div>
-          <QuantityButtonGroup product={product} />
+          <QuantityButtonGroup product={product}  count={count} closeModal={closeModal}/>
         </div>
       </Modal>
     </div>

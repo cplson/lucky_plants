@@ -1,10 +1,13 @@
 import Image from "next/image";
-import { FC } from "react";
 import CartButton from "./CartButton";
-import { ProductProps } from "@/lib/types";
+import { db } from "@/lib/db";
+import { cookies } from "next/headers";
+import { getUserFromCookie } from "@/lib/auth";
+import { Product } from "@/lib/types";
 
-const Product: FC<ProductProps> = ({ product }) => {
-  
+async function Product({ product }: { product: Product }) {
+  const itemCount = await getData(product.id);
+
   return (
     <div className="flex flex-col items-center gap-2 my-8">
       <h2 className="text-xl font-semibold text-stone-700 tracking-wide">
@@ -23,12 +26,32 @@ const Product: FC<ProductProps> = ({ product }) => {
         {product.price}
       </p>
       {product.stock > 0 ? (
-          <CartButton product={product}/>
+        <CartButton product={product} count={itemCount} />
       ) : (
         <p className="text-3xl font-bold text-amber-700">Sold Out</p>
       )}
     </div>
   );
 }
+
+const getData = async (id: string) => {
+  const user = await getUserFromCookie(cookies());
+  const cart = await db.cart.findFirstOrThrow({
+    where: {
+      shopperId: user?.id,
+    },
+    include: {
+      items: true,
+    },
+  });
+
+  let count = 0;
+  for (let item of cart.items) {
+    if (item.productId === id) {
+      count++;
+    }
+  }
+  return count;
+};
 
 export default Product;

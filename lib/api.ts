@@ -44,3 +44,12 @@ export const signin = (user: User) => {
 export const addItemToCart = (data: ItemInfo) => {
     return fetcher({url: '/api/updateCart', method: 'post', body: data})
 }
+
+// export const getItemFromCart = (id: string) => {
+//     return fetcher({url: '/api/getItemFromCart', method: 'post', body: id})
+// }
+
+export const authUser = () => {
+    return fetcher({url: '/api/authUser', method: 'get'})
+}
+
