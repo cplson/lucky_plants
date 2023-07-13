@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 // import { db } from "@/lib/db";
-import {  getCart, authenticateUser, getItems } from "@/lib/dbHelpers"
+import {  getCart, authenticateUser, getItems, addQuantity } from "@/lib/dbHelpers"
 
 
 export default async function updateCart(
@@ -23,13 +23,33 @@ export default async function updateCart(
         
         // GET CART
         const cart = await getCart(user);
-        console.log(cart);
+        const product = req.body.product
 
         // GET CART ITEMS
-        const items = await getItems(cart!.id, req.body.product.id);
-        console.log('number of items in cart', items.length);
-        console.log('newQuantity', req.body.quantity)
-        console.log(req.body);
+        const items = await getItems(cart!.id, product.id);
+        const currentQuantity = items.length;
+
+        console.log('cart', cart);
+        console.log('items', items);
+        
+        // DETERMINE IF ITEMS NEED TO BE REMOVED OR ADDED FROM THE CART
+        if(currentQuantity < req.body.quantity){
+          // ADD
+          const createQuantity = req.body.quantity - currentQuantity
+          const newQuantity = await addQuantity(createQuantity, product, cart!.id);
+          res.status(201).json({data: newQuantity})
+          // res.status(200);
+        }
+        else if(currentQuantity > req.body.quantity){
+          // REMOVE
+          // const deleteQuantity = currentQuantity - req.body.quantity;
+          // const newQuantity = await addQuantity(deleteQuantity, product, cart!.id);
+          // res.status(201).json({data: newQuantity})
+          res.status(200);
+        }else{
+          res.send(200);
+        }
+        
       } catch (err) {
         console.log(err);
         res.status(500).json({})
@@ -37,8 +57,6 @@ export default async function updateCart(
     } catch (err) {
       res.status(403).json({message: 'username or password is incorrect'})
     }
-
-    res.status(201).json({})
   } else {
     res.status(500).json({})
   }

@@ -44,6 +44,3 @@ export const signin = (user: User) => {
 export const addItemToCart = (data: ItemInfo) => {
     return fetcher({url: '/api/updateCart', method: 'post', body: data})
 }
-// export const addItemToCart = (product: Product) => {
-//     return fetcher({url: '/api/updateCart', method: 'post', body: product})
-// }
