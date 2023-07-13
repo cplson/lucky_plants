@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 // import { db } from "@/lib/db";
-import {  getCart, authenticateUser, getItems, addQuantity } from "@/lib/dbHelpers"
-
+import {  getCart, authenticateUser, getItems, addQuantity, deleteQuantity } from "@/lib/dbHelpers"
+import { Product } from "@/lib/types";
 
 export default async function updateCart(
   req: NextApiRequest,
@@ -23,7 +23,8 @@ export default async function updateCart(
         
         // GET CART
         const cart = await getCart(user);
-        const product = req.body.product
+        const product = req.body.product;
+        const quantity = req.body.quantity;
 
         // GET CART ITEMS
         const items = await getItems(cart!.id, product.id);
@@ -33,19 +34,19 @@ export default async function updateCart(
         console.log('items', items);
         
         // DETERMINE IF ITEMS NEED TO BE REMOVED OR ADDED FROM THE CART
-        if(currentQuantity < req.body.quantity){
+        if(currentQuantity < quantity){
           // ADD
-          const createQuantity = req.body.quantity - currentQuantity
+          const createQuantity = quantity - currentQuantity
           const newQuantity = await addQuantity(createQuantity, product, cart!.id);
           res.status(201).json({data: newQuantity})
           // res.status(200);
         }
-        else if(currentQuantity > req.body.quantity){
+        else if(currentQuantity > quantity){
           // REMOVE
-          // const deleteQuantity = currentQuantity - req.body.quantity;
-          // const newQuantity = await addQuantity(deleteQuantity, product, cart!.id);
-          // res.status(201).json({data: newQuantity})
-          res.status(200);
+          const removeQuantity = currentQuantity - quantity;
+          const newQuantity = await deleteQuantity(removeQuantity, product, cart!.id, items);
+          res.status(201).json({data: newQuantity})
+          // res.status(200);
         }else{
           res.send(200);
         }

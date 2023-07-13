@@ -3,7 +3,7 @@ import { User } from "@/lib/types";
 import { NextApiRequest } from "next";
 import { validateJWT } from "@/lib/auth";
 import { db } from "./db";
-import { Product } from "@prisma/client";
+import { Product, CartItem } from "@prisma/client";
 
 export const authenticateUser = async (req: NextApiRequest) => {
   return await validateJWT(req.cookies[process.env.COOKIE_NAME]);
@@ -44,26 +44,27 @@ export const addQuantity = async (
         name: product.name,
         price: product.price,
         cartId: cartId,
-        productId: product.id
+        productId: product.id,
       },
     });
   }
 };
 
-export const deleteQuantity = async (
+export async function deleteQuantity(
   quantity: number,
   product: Product,
-  cartId: string
-) => {
+  cartId: string,
+  items: CartItem[]
+) {
+  console.log("cartId is:", cartId);
+  console.log("productId is:", product.id);
+
+  // Feels kind of hacky but it gets the job done
   for (let i = 0; i < quantity; i++) {
-    console.log("loop");
-    await db.cartItem.create({
-      data: {
-        name: product.name,
-        price: product.price,
-        cartId: cartId,
-        productId: product.id
+    await db.cartItem.delete({
+      where: {
+        id: items[i].id
       },
     });
   }
-};
+}
