@@ -29,7 +29,7 @@ const QuantityButtonGroup: FC<ProductProps> = ({ product, count, closeModal }) =
       <div className="flex mb-8">
         <Button
           intent="secondary"
-          size="small"
+          size="medium"
           className="rounded-l-xl border-l-2 px-4"
           onClick={decrement}
         >
@@ -42,14 +42,14 @@ const QuantityButtonGroup: FC<ProductProps> = ({ product, count, closeModal }) =
         />
         <Button
           intent="secondary"
-          size="small"
+          size="medium"
           className="rounded-r-xl border-r-2 px-4"
           onClick={increment}
         >
           +
         </Button>
       </div>
-      <Button onClick={() => updateCart(product, quantity, closeModal!)} intent="tertiary" className="">
+      <Button onClick={() => updateCart(product, quantity, closeModal!)} intent="tertiary" size='large' className="">
         Confirm
       </Button>
     </>

@@ -33,7 +33,7 @@ const CartButton: FC<ProductProps> = ({ product, count}) => {
 
   return (
     <div>
-      <Button onClick={openModal}>Add to Cart</Button>
+      <Button className='' size={'small'} onClick={openModal}>ADD TO CART</Button>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}

@@ -2,8 +2,7 @@ import Card from "@/components/Card";
 import { getUserFromCookie } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { cookies } from "next/headers";
-import { Cart, CartItem } from "@prisma/client";
-import Product from "@/components/Product";
+import { Cart, CartItem, Product } from "@prisma/client";
 import Image from "next/image";
 
 export default async function Cart() {
@@ -25,6 +24,9 @@ export default async function Cart() {
       where: {
         cartId: cart.id,
       },
+      include:{
+        product: true
+      },
       distinct: ["productId"],
     });
     return uniqueItems;
@@ -36,17 +38,17 @@ export default async function Cart() {
   return (
     <div>
       <Card className="shadow-md">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
+        <div className="">
           {uniqueProducts.map((product) => {
             return (
               <div>
-                <h1>{product.name}</h1>
-                <div className="relative" style={{ height: "200px", width: "200px" }}>
+                <h1>{product.product.name}</h1>
+                <div className="relative" style={{ height: "100px", width: "100px" }}>
         <Image
           className="object-cover rounded-lg border-2 border-gray-700"
-          src={product.url}
+          src={product.product.url}
           fill
-          alt={product.name}
+          alt={product.product.name}
         />
       </div>
               </div>

@@ -13,12 +13,12 @@ const buttonClasses = cva(
     variants: {
       intent: {
         primary: [
-          "bg-green-700",
-          "rounded-lg",
-          "hover:scale-110",
-          "text-white",
-          "border-transparent",
-          "hover:bg-green-600",
+          "text-green-700",
+          "font-semibold",
+          "hover:text-green-700",
+          "hover:border-b-2",
+          "hover:border-green-700",
+          
         ],
 
         secondary: [
@@ -48,9 +48,9 @@ const buttonClasses = cva(
         text: ["bg-transparent", "text-black", "hover:bg-gray-100"],
       },
       size: {
-        small: ["text-2xl", "px-4", "py-1"],
-        medium: ["text-lg", "px-6", "py-2"],
-        large: ["text-xlg", "px-8", "py-4"],
+        small: ["text-base", "px-0", "py-0"],
+        medium: ["text-2xl", "px-4", "py-1"],
+        large: ["text-xl", "px-4", "py-2"],
       },
     },
     defaultVariants: {

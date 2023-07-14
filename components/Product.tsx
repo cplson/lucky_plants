@@ -13,7 +13,7 @@ async function Product({ product }: { product: Product }) {
       <h2 className="text-xl font-semibold text-stone-700 tracking-wide">
         {product.name}
       </h2>
-      <div className="relative" style={{ height: "200px", width: "200px" }}>
+      <div className="relative mt-6 mb-4" style={{ height: "200px", width: "200px" }}>
         <Image
           className="object-cover rounded-lg border-2 border-gray-700"
           src={product.url}
@@ -21,15 +21,17 @@ async function Product({ product }: { product: Product }) {
           alt={product.name}
         />
       </div>
-      <p className="text-xl font-medium text-stone-500 tracking-wide">
-        <span className="font-normal mr-1">$</span>
-        {product.price}
-      </p>
-      {product.stock > 0 ? (
-        <CartButton product={product} count={itemCount} />
-      ) : (
-        <p className="text-3xl font-bold text-amber-700">Sold Out</p>
-      )}
+      <div className="flex justify-between items-center w-full">
+        <p className="text-2xl font-medium text-stone-500">
+          <span className="mr-1">$</span>
+          {product.price}
+        </p>
+        {product.stock > 0 ? (
+          <CartButton product={product} count={itemCount} />
+        ) : (
+          <p className="text-3xl font-bold text-amber-700">Sold Out</p>
+        )}
+      </div>
     </div>
   );
 }
@@ -43,8 +45,8 @@ const getData = async (id: string) => {
       shopperId: user?.id,
     },
     include: {
-      items: true
-    }, 
+      items: true,
+    },
   });
 
   let count = 0;
