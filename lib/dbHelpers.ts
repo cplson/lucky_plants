@@ -14,12 +14,15 @@ export const getCart = async (user: User) => {
     where: {
       shopperId: user.id,
     },
+    include: {
+      items: true
+    }
   });
 };
 
 export const getItems = async (cartId: string, productId: string) => {
-  console.log("cartId is:", cartId);
-  console.log("productId is:", productId);
+  // console.log("cartId is:", cartId);
+  // console.log("productId is:", productId);
 
   const items = await db.cartItem.findMany({
     where: {
@@ -28,7 +31,7 @@ export const getItems = async (cartId: string, productId: string) => {
     },
   });
 
-  console.log(items);
+  // console.log(items);
   return items;
 };
 
@@ -41,8 +44,6 @@ export const addQuantity = async (
     console.log("loop");
     await db.cartItem.create({
       data: {
-        name: product.name,
-        price: product.price,
         cartId: cartId,
         productId: product.id,
       },
@@ -56,8 +57,8 @@ export async function deleteQuantity(
   cartId: string,
   items: CartItem[]
 ) {
-  console.log("cartId is:", cartId);
-  console.log("productId is:", product.id);
+  // console.log("cartId is:", cartId);
+  // console.log("productId is:", product.id);
 
   // Feels kind of hacky but it gets the job done
   for (let i = 0; i < quantity; i++) {

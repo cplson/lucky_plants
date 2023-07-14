@@ -7,7 +7,7 @@ import {
   addQuantity,
   deleteQuantity,
 } from "@/lib/dbHelpers";
-import { Product } from "@/lib/types";
+import { Product } from "@prisma/client";
 
 export default async function updateCart(
   req: NextApiRequest,
@@ -20,12 +20,6 @@ export default async function updateCart(
       const user = await authenticateUser(req);
       if (user) {
         try {
-          // 1. get the current quantity of this product that this user has
-          //    in their cart.
-          //      -that number will determine how many products will need to be
-          //       created or deleted
-          //      -will probably require an if/else statement to determine if
-          //       items will need to be created or deleted
 
           // GET CART
           const cart = await getCart(user);

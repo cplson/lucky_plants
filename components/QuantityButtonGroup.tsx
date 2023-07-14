@@ -1,12 +1,13 @@
 "use client";
-import { Product, ProductProps } from "@/lib/types";
+import { ProductProps } from "@/lib/types";
 import { FC, useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
 import { addItemToCart } from "@/lib/api";
+import { Product } from "@prisma/client";
 
 const QuantityButtonGroup: FC<ProductProps> = ({ product, count, closeModal }) => {
-  console.log('count is', count);
+  // console.log('count is', count);
   const [quantity, setQuantity] = useState(count);
 
   const increment = () => {

@@ -3,7 +3,7 @@ import CartButton from "./CartButton";
 import { db } from "@/lib/db";
 import { cookies } from "next/headers";
 import { getUserFromCookie } from "@/lib/auth";
-import { Product } from "@/lib/types";
+import { Product } from "@prisma/client";
 
 async function Product({ product }: { product: Product }) {
   const itemCount = await getData(product.id);
@@ -15,7 +15,7 @@ async function Product({ product }: { product: Product }) {
       </h2>
       <div className="relative" style={{ height: "200px", width: "200px" }}>
         <Image
-          className="object-cover rounded-lg"
+          className="object-cover rounded-lg border-2 border-gray-700"
           src={product.url}
           fill
           alt={product.name}
@@ -34,23 +34,26 @@ async function Product({ product }: { product: Product }) {
   );
 }
 
+// TODO: FIND A WAY TO MAKE THIS NEVER CACHE
+//        -will probably have use fetch() and then use prisma client in the api
 const getData = async (id: string) => {
   const user = await getUserFromCookie(cookies());
-  const cart = await db.cart.findFirstOrThrow({
+  const cart = await db.cart.findUnique({
     where: {
       shopperId: user?.id,
     },
     include: {
-      items: true,
-    },
+      items: true
+    }, 
   });
 
   let count = 0;
-  for (let item of cart.items) {
+  for (let item of cart!.items) {
     if (item.productId === id) {
       count++;
     }
   }
+  // console.log(count)
   return count;
 };
 

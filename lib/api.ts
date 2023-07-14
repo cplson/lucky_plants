@@ -1,5 +1,6 @@
 // Fetcher is our main API handler
-import { NewUser, Product, User } from "./types"
+import { NewUser, User } from "./types"
+import { Product } from "@prisma/client"
 import { FC } from "react"
 
 type ItemInfo = {

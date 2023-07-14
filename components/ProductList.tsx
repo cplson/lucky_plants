@@ -6,7 +6,7 @@ export default async function ProductList() {
     
       <div className="grid justify-items-center grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
         {products.map((product) => {
-          return  <div><Product product={product} /></div>
+          return  <div key={product.id}><Product product={product} /></div>
         })}
       </div>
     
