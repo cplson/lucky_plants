@@ -15,6 +15,8 @@ const buttonClasses = cva(
         primary: [
           "text-green-700",
           "font-semibold",
+          "border-b-2",
+          "border-green-700/0",
           "hover:text-green-700",
           "hover:border-b-2",
           "hover:border-green-700",

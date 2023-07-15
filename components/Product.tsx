@@ -13,7 +13,7 @@ async function Product({ product }: { product: Product }) {
       <h2 className="text-xl font-semibold text-stone-700 tracking-wide">
         {product.name}
       </h2>
-      <div className="relative mt-6 mb-4" style={{ height: "200px", width: "200px" }}>
+      <div className="relative mt-6 mb-4 w-48 h-48">
         <Image
           className="object-cover rounded-lg border-2 border-gray-700"
           src={product.url}

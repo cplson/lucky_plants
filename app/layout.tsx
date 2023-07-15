@@ -27,17 +27,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" id='root' className={`${cormorant.variable} ${inter.variable}`}>
-      <body className="flex-column justify-center p-8 font-sans bg-gradient-to-r from-lime-100 to-green-100  max-w-7xl">
+    <html
+      lang="en"
+      id="root"
+      className={`${cormorant.variable} ${inter.variable}`}
+    >
+      <body className="flex-column justify-center p-8 font-sans bg-gradient-to-r from-lime-100 to-green-100  max-w-7xl mx-auto">
         {/* TOP MENU */}
-        <div className={"flex justify-between items-center"}>
-
-          <Link href="/home" className=''>
-            <h1 className="font-serif text-4xl font-semibold text-green-900">Lucky</h1>
+        <div className="flex justify-between items-center">
+          <Link href="/home" className="">
+            <h1 className="font-serif text-4xl font-semibold text-green-900">
+              Lucky
+            </h1>
           </Link>
           {/* NAVIGATION */}
           <div className="">
-
             <NavBar />
           </div>
           <div className="flex justify-end">

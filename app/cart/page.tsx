@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import { cookies } from "next/headers";
 import { Cart, CartItem, Product } from "@prisma/client";
 import Image from "next/image";
+import Button from "@/components/Button";
 
 export default async function Cart() {
   const getData = async () => {
@@ -24,8 +25,8 @@ export default async function Cart() {
       where: {
         cartId: cart.id,
       },
-      include:{
-        product: true
+      include: {
+        product: true,
       },
       distinct: ["productId"],
     });
@@ -34,24 +35,52 @@ export default async function Cart() {
 
   const cart = await getData();
   const uniqueProducts = await getUniqueItems(cart);
-  // console.log(uniqueProducts);
   return (
     <div>
-      <Card className="shadow-md">
-        <div className="">
+      <Card className="shadow-md max-w-3xl mx-auto">
+        <div className="not-first:mt-8">
           {uniqueProducts.map((product) => {
+            let count = 0;
+            for (let item of cart!.items) {
+              if (item.productId === product.product.id) {
+                count++;
+              }
+            }
             return (
-              <div>
-                <h1>{product.product.name}</h1>
-                <div className="relative" style={{ height: "100px", width: "100px" }}>
-        <Image
-          className="object-cover rounded-lg border-2 border-gray-700"
-          src={product.product.url}
-          fill
-          alt={product.product.name}
-        />
-      </div>
-              </div>
+              <>
+                <div className="flex justify-between">
+                  <div>
+                    <h1 className="text-xl font-semibold text-stone-700 tracking-wide mb-2">
+                      {product.product.name}
+                    </h1>
+                    <div className="relative w-48 h-48">
+                      <Image
+                        className="object-cover rounded-lg border-2 border-gray-700"
+                        src={product.product.url}
+                        fill
+                        alt={product.product.name}
+                      />
+                    </div>
+                  </div>
+                  <div className="flex flex-col justify-between items-end">
+                    <div className="flex flex-col">
+                      <div className="text-2xl font-semibold">
+                        ${product.product.price}
+                      </div>
+                      <div className="text-lg">
+                        <span className="font-semibold">Qty:</span> {count}
+                      </div>
+                    </div>
+                    <div className="flex">
+                      <Button size="small" className="mr-4">
+                        Edit
+                      </Button>
+                      <Button size="small">Delete</Button>
+                    </div>
+                  </div>
+                </div>
+                <hr />
+              </>
             );
           })}
         </div>
