@@ -54,3 +54,6 @@ export const authUser = () => {
     return fetcher({url: '/api/authUser', method: 'get'})
 }
 
+export const removeItems = (id: string) => {
+    return fetcher({url: '/api/deleteItems', method: 'post', body: id})
+}

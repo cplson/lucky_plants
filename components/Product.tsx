@@ -27,7 +27,7 @@ async function Product({ product }: { product: Product }) {
           {product.price}
         </p>
         {product.stock > 0 ? (
-          <CartButton product={product} count={itemCount} />
+          <CartButton product={product} text={'ADD TO CART'} count={itemCount} />
         ) : (
           <p className="text-3xl font-bold text-amber-700">Sold Out</p>
         )}

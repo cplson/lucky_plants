@@ -27,7 +27,9 @@ export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
 export type ProductProps = {
     product: Product
     count: number
-    closeModal?: () => void
+    text: string,
+    className?: string,
+    closeModal?: () => void,
 }
 
 export type NewUser = {

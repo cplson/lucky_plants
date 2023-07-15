@@ -9,7 +9,7 @@ import Image from "next/image";
 Modal.setAppElement("#root");
 
 
-const CartButton: FC<ProductProps> = ({ product, count}) => {
+const CartButton: FC<ProductProps> = ({ product, text, count, className}) => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const customStyles = {
     content: {
@@ -33,7 +33,7 @@ const CartButton: FC<ProductProps> = ({ product, count}) => {
 
   return (
     <div>
-      <Button className='' size={'small'} onClick={openModal}>ADD TO CART</Button>
+      <Button className={className} size={'small'} onClick={openModal}>{text}</Button>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}

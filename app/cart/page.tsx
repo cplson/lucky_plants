@@ -1,24 +1,14 @@
 import Card from "@/components/Card";
-import { getUserFromCookie } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { cookies } from "next/headers";
 import { Cart, CartItem, Product } from "@prisma/client";
 import Image from "next/image";
 import Button from "@/components/Button";
+import CartButton from "@/components/CartButton";
+import { getData } from "@/lib/dbHelpers";
+import DeleteButton from "@/components/DeleteButton";
 
 export default async function Cart() {
-  const getData = async () => {
-    const user = await getUserFromCookie(cookies());
-    const cart = await db.cart.findFirstOrThrow({
-      where: {
-        shopperId: user?.id,
-      },
-      include: {
-        items: true,
-      },
-    });
-    return cart;
-  };
+  
 
   const getUniqueItems = async (cart: Cart) => {
     const uniqueItems = await db.cartItem.findMany({
@@ -33,8 +23,19 @@ export default async function Cart() {
     return uniqueItems;
   };
 
+  const getSubtotal = () => {
+    let total = 0;
+    for(let item of cart.items){
+      total += item.product.price;
+    }
+    return total
+  }
+  
+  
+
   const cart = await getData();
   const uniqueProducts = await getUniqueItems(cart);
+  const subtotal = getSubtotal();
   return (
     <div>
       <Card className="shadow-md max-w-3xl mx-auto">
@@ -63,7 +64,7 @@ export default async function Cart() {
                     </div>
                   </div>
                   <div className="flex flex-col justify-between items-end">
-                    <div className="flex flex-col">
+                    <div className="flex flex-col items-end">
                       <div className="text-2xl font-semibold">
                         ${product.product.price}
                       </div>
@@ -72,10 +73,8 @@ export default async function Cart() {
                       </div>
                     </div>
                     <div className="flex">
-                      <Button size="small" className="mr-4">
-                        Edit
-                      </Button>
-                      <Button size="small">Delete</Button>
+                      <CartButton product={product.product} count={count} text={'Edit'} className={"mr-4"} />
+                      <DeleteButton product={product.product} cart={cart}/>
                     </div>
                   </div>
                 </div>
@@ -83,6 +82,10 @@ export default async function Cart() {
               </>
             );
           })}
+          <div className="flex justify-between items-start">
+            <div className="text-2xl"><span className="font-semibold">Subtotal:</span> ${subtotal}</div>
+            <Button intent='tertiary' size={'medium'}>CHECKOUT</Button>
+          </div>
         </div>
       </Card>
     </div>

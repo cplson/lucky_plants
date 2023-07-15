@@ -1,9 +1,10 @@
 // dbHelpers.ts is used for helper functions related to db data
 import { User } from "@/lib/types";
 import { NextApiRequest } from "next";
-import { validateJWT } from "@/lib/auth";
+import { getUserFromCookie, validateJWT } from "@/lib/auth";
 import { db } from "./db";
 import { Product, CartItem } from "@prisma/client";
+import { cookies } from "next/headers";
 
 export const authenticateUser = async (req: NextApiRequest) => {
     return await validateJWT(req.cookies[process.env.COOKIE_NAME]);
@@ -69,3 +70,20 @@ export async function deleteQuantity(
     });
   }
 }
+
+export const getData = async () => {
+  const user = await getUserFromCookie(cookies());
+  const cart = await db.cart.findFirstOrThrow({
+    where: {
+      shopperId: user?.id,
+    },
+    include: {
+      items: {
+        include:{
+          product: true
+        }
+      }
+    },
+  });
+  return cart;
+};
