@@ -6,7 +6,7 @@ import { db } from "./db";
 import { Product, CartItem } from "@prisma/client";
 import { cookies } from "next/headers";
 
-export const authenticateUser = async (req: NextApiRequest) => {
+export const authenticateUser = async (req) => {
     return await validateJWT(req.cookies[process.env.COOKIE_NAME]);
 };
 

@@ -4,6 +4,7 @@ import { Inter, Cormorant } from "next/font/google";
 import Socials from "@/components/Socials";
 import Cart from "@/components/Cart";
 import Link from "next/link";
+import { cookies } from "next/headers";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -26,6 +27,9 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const cookie = cookies()
+  const cookieList = cookie.getAll()
+  const cookieString = cookieList.map((c) => `${c.name}=${c.value}`).join("; ");
   return (
     <html
       lang="en"
@@ -50,7 +54,7 @@ export default function RootLayout({
 
             {/* CART */}
             <Link href="/cart">
-              <Cart />
+              <Cart cookieString={cookieString}/>
             </Link>
           </div>
         </div>
