@@ -1,14 +1,11 @@
 import Card from "@/components/Card";
 import { db } from "@/lib/db";
-import { Cart, CartItem, Product } from "@prisma/client";
+import { Cart } from "@prisma/client";
 import Image from "next/image";
-import Button from "@/components/Button";
 import CartButton from "@/components/CartButton";
 import { getData } from "@/lib/dbHelpers";
 import DeleteButton from "@/components/DeleteButton";
 import PreviewPage from "@/components/CheckoutButton";
-import { getUserFromCookie } from "@/lib/auth";
-import { cookies } from "next/headers";
 import { loadStripe } from "@stripe/stripe-js";
 
 export default async function Cart() {

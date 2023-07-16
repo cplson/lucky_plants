@@ -21,7 +21,7 @@ export const fetcher: FC<FetchData> = async ({ url, method, body, json = true })
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json"
-        }
+        },
     })
 
     if(!res.ok){
@@ -58,6 +58,10 @@ export const removeItems = (id: string) => {
     return fetcher({url: '/api/deleteItems', method: 'post', body: id})
 }
 
-// export const checkout = (id: string) => {
+// export const signout = (id: string) => {
 //     return fetcher({url: '/api/checkout_sessions', method: 'post', body: id})
+// }
+
+// export const getCart = (id: string) => {
+//     return fetcher({url: '/api/getCart', method: 'post', body: id})
 // }

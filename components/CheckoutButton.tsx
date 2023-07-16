@@ -1,9 +1,8 @@
 'use client'
 
-import React from 'react';
+import React, { FormEvent } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Cart } from '@prisma/client';
-import { checkout } from '@/lib/api';
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
@@ -25,8 +24,8 @@ export default function PreviewPage({cart}: {cart: Cart}) {
     }
   }, []);
 
-  const handleCheckout = async (e) => {
-    e.preventDefault();
+  const handleCheckout = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     const res = await fetch(`/api/checkout_sessions`, {
         method: 'POST',
         headers: {
@@ -45,9 +44,9 @@ export default function PreviewPage({cart}: {cart: Cart}) {
       })
   }
   return (
-    <form >
+    <form onSubmit={handleCheckout}>
       <section>
-        <button onClick={handleCheckout} type="submit" role="link">
+        <button type="submit" role="link">
           Checkout
         </button>
       </section>
