@@ -57,3 +57,7 @@ export const authUser = () => {
 export const removeItems = (id: string) => {
     return fetcher({url: '/api/deleteItems', method: 'post', body: id})
 }
+
+// export const checkout = (id: string) => {
+//     return fetcher({url: '/api/checkout_sessions', method: 'post', body: id})
+// }

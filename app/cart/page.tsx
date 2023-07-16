@@ -6,10 +6,13 @@ import Button from "@/components/Button";
 import CartButton from "@/components/CartButton";
 import { getData } from "@/lib/dbHelpers";
 import DeleteButton from "@/components/DeleteButton";
+import PreviewPage from "@/components/CheckoutButton";
+import { getUserFromCookie } from "@/lib/auth";
+import { cookies } from "next/headers";
+import { loadStripe } from "@stripe/stripe-js";
 
 export default async function Cart() {
   
-
   const getUniqueItems = async (cart: Cart) => {
     const uniqueItems = await db.cartItem.findMany({
       where: {
@@ -31,7 +34,11 @@ export default async function Cart() {
     return total
   }
   
-  
+  // Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
+);
 
   const cart = await getData();
   const uniqueProducts = await getUniqueItems(cart);
@@ -84,7 +91,8 @@ export default async function Cart() {
           })}
           <div className="flex justify-between items-start">
             <div className="text-2xl"><span className="font-semibold">Subtotal:</span> ${subtotal}</div>
-            <Button intent='tertiary' size={'medium'}>CHECKOUT</Button>
+            <PreviewPage cart={cart}/>
+            {/* <PreviewPage user={user}/> */}
           </div>
         </div>
       </Card>
