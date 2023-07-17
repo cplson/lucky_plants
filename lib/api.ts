@@ -42,9 +42,9 @@ export const signin = (user: User) => {
     return fetcher({url: '/api/signin', method: 'post', body: user})
 }
 
-export const addItemToCart = (data: ItemInfo) => {
-    return fetcher({url: '/api/updateCart', method: 'post', body: data})
-}
+// export const addItemToCart = (data: ItemInfo) => {
+//     return fetcher({url: '/api/updateCart', method: 'post', body: data})
+// }
 
 // export const getItemFromCart = (id: string) => {
 //     return fetcher({url: '/api/getItemFromCart', method: 'post', body: id})

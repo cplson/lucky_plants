@@ -67,6 +67,7 @@ export async function deleteQuantity(
       where: {
         id: items[i].id
       },
+      
     });
   }
 }

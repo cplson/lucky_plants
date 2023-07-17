@@ -1,9 +1,10 @@
 'use client'
 import { useEffect } from "react";
 import { ShoppingCart } from "react-feather";
+import { useRouter}from 'next/navigation'
 
 export default async function Cart({cookieString}) {
-
+  const router = useRouter()
   const getData = async () => {
     try {
       const response = await fetch("http://localhost:3000/api/getCart", {
@@ -27,7 +28,7 @@ export default async function Cart({cookieString}) {
   };
   const cart = await getData();
   
-  console.log('cart in Cart:', cart)
+  // console.log('cart in Cart:', cart)
   return (
     <div className="flex justify-content-end ml-8 relative">
       <ShoppingCart className="" />

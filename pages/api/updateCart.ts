@@ -8,6 +8,7 @@ import {
   deleteQuantity,
 } from "@/lib/dbHelpers";
 import { Product } from "@prisma/client";
+import { db } from "@/lib/db";
 
 export default async function updateCart(
   req: NextApiRequest,
@@ -37,24 +38,33 @@ export default async function updateCart(
           if (currentQuantity < quantity) {
             // ADD
             const createQuantity = quantity - currentQuantity;
-            const newQuantity = await addQuantity(
+            await addQuantity(
               createQuantity,
               product,
               cart!.id
             );
-            res.status(201).json({ data: newQuantity });
+            const newQuantity = await db.cartItem.findMany({
+              where: {
+                productId: product.id
+              }
+            })
+            res.send({data: newQuantity.length, status: 201});
             // res.status(200);
           } else if (currentQuantity > quantity) {
             // REMOVE
             const removeQuantity = currentQuantity - quantity;
-            const newQuantity = await deleteQuantity(
+            await deleteQuantity(
               removeQuantity,
               product,
               cart!.id,
               items
             );
-            res.status(201).json({ data: newQuantity });
-            // res.status(200);
+            const newQuantity = await db.cartItem.findMany({
+              where: {
+                productId: product.id
+              }
+            })
+            res.send({data: newQuantity.length, status: 201});
           } else {
             res.send(200);
           }
