@@ -20,12 +20,23 @@ export default async function handler(
             }
         })
 
+        const uniqueItems = await db.cartItem.findMany({
+          where:{
+            cartId: cart.id
+          },
+          include:{
+            product: true
+          },
+          distinct: ['productId']
+        })
+        
+        console.log('uniqueItems:', uniqueItems)
   if (req.method === 'POST') {
     try {
         console.log('before session')
       // Create Checkout Sessions from body params.
       const session = await stripe.checkout.sessions.create({
-        line_items: cart.items.map(item => {
+        line_items: uniqueItems.map(item => {
             return{
                 price_data: {
                     currency: 'usd',
