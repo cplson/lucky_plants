@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { ShoppingCart } from "react-feather";
 import { useRouter}from 'next/navigation'
+import clsx from "clsx";
 
 export default async function Cart({cookieString}) {
   const router = useRouter()
@@ -30,10 +31,10 @@ export default async function Cart({cookieString}) {
   
   // console.log('cart in Cart:', cart)
   return (
-    <div className="flex justify-content-end ml-8 relative">
+    <div className={clsx("flex justify-content-end ml-8 relative", cart.items.length > 0 && 'mr-4')}>
       <ShoppingCart className="" />
       {cart.items.length > 0 && (
-        <div className="absolute -right-4 -top-4 text-white bg-red-500 px-2 py-1 rounded-full">
+        <div className="absolute -right-6 -top-5 text-white bg-red-500 px-2 py-1 rounded-full">
           {cart.items.length}
         </div>
       )}

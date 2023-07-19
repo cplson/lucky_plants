@@ -5,6 +5,7 @@ import Socials from "@/components/Socials";
 import Cart from "@/components/Cart";
 import Link from "next/link";
 import { cookies } from "next/headers";
+import Button from "@/components/Button";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -36,24 +37,37 @@ export default function RootLayout({
       id="root"
       className={`${cormorant.variable} ${inter.variable}`}
     >
-      <body className="flex-column justify-center p-8 font-sans bg-gradient-to-r from-lime-100 to-green-100  max-w-7xl mx-auto ">
+      <body className="flex-column justify-center p-4 w-4/5 font-sans bg-gradient-to-r from-lime-100 to-green-100  max-w-7xl mx-auto">
         {/* TOP MENU */}
-        <div className="flex justify-between items-center invisible md:visible">
-          <Link href="/home" className="">
-            <h1 className="font-serif text-4xl font-semibold text-green-900">
-              Lucky
-            </h1>
-          </Link>
-          {/* NAVIGATION */}
-          <div className="">
-            <NavBar />
+        <div className="relative">
+          <div className="flex justify-between items-center invisible md:visible absolute w-full">
+            <Link href="/home" className="">
+              <h1 className="font-serif text-4xl font-semibold text-green-900">
+                Lucky
+              </h1>
+            </Link>
+            {/* NAVIGATION */}
+            <div className="">
+              <NavBar />
+            </div>
+            {/* CART */}
+            <Link href="/cart" className="">
+              <Cart cookieString={cookieString} />
+            </Link>
           </div>
-          {/* CART */}
-          <Link href="/cart">
-            <Cart cookieString={cookieString} />
-          </Link>
+          <div className="flex justify-between items-center md:invisible absolute w-full">
+            <Button>Nav</Button>
+            <Link href="/home" className="">
+              <h1 className="font-serif text-4xl font-semibold text-green-900">
+                Lucky
+              </h1>
+            </Link>
+            <Link href="/cart" className="">
+              <Cart cookieString={cookieString} />
+            </Link>
+          </div>
         </div>
-        {children}
+        <div className="mt-20 w-full">{children}</div>
         <footer className="">
           <Socials />
         </footer>
