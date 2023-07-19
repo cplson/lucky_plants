@@ -50,7 +50,7 @@ export default function RootLayout({
           </div>
           <div className="flex justify-end">
             {/* Social list */}
-            <Socials />
+            
 
             {/* CART */}
             <Link href="/cart">
@@ -59,6 +59,9 @@ export default function RootLayout({
           </div>
         </div>
         {children}
+        <footer className="">
+        <Socials/>
+        </footer>
       </body>
     </html>
   );
