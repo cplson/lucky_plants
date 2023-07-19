@@ -46,7 +46,13 @@ const buttonClasses = cva(
           "scale-100",
           "hover:scale-110",
           "focus:scale-110",
-
+        ],
+        hamburger: [
+          "text-green-700",
+          "font-semibold",
+          "hover:text-green-700",
+          "hover:border-green-700",
+          
         ],
         text: ["bg-transparent", "text-black", "hover:bg-gray-100"],
       },
@@ -54,6 +60,7 @@ const buttonClasses = cva(
         small: ["text-base", "px-0", "py-0"],
         medium: ["text-2xl", "px-4", "py-1"],
         large: ["text-xl", "px-4", "py-2"],
+        
       },
     },
     defaultVariants: {

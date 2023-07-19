@@ -6,6 +6,7 @@ import Cart from "@/components/Cart";
 import Link from "next/link";
 import { cookies } from "next/headers";
 import Button from "@/components/Button";
+import { Menu } from "react-feather";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -37,7 +38,7 @@ export default function RootLayout({
       id="root"
       className={`${cormorant.variable} ${inter.variable}`}
     >
-      <body className="flex-column justify-center p-4 w-4/5 font-sans bg-gradient-to-r from-lime-100 to-green-100  max-w-7xl mx-auto">
+      <body className="flex-column justify-center p-4 sm:w-4/5 font-sans bg-gradient-to-r from-lime-100 to-green-100  max-w-7xl mx-auto">
         {/* TOP MENU */}
         <div className="relative">
           <div className="flex justify-between items-center invisible md:visible absolute w-full">
@@ -56,7 +57,7 @@ export default function RootLayout({
             </Link>
           </div>
           <div className="flex justify-between items-center md:invisible absolute w-full">
-            <Button>Nav</Button>
+            <button className="mr-12"><Menu className="" width={'40'} height={'40'}/></button>
             <Link href="/home" className="">
               <h1 className="font-serif text-4xl font-semibold text-green-900">
                 Lucky
