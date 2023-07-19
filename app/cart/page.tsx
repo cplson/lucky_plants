@@ -86,8 +86,8 @@ const stripePromise = loadStripe(
               </>
             );
           })}
-          <div className="flex justify-between items-start">
-            <div className="text-2xl"><span className="font-semibold">Subtotal:</span> ${subtotal}</div>
+          <div className="md:flex justify-between items-start">
+            <div className="text-2xl m-4 md:w-1/2 md:m-0"><span className="font-semibold">Subtotal:</span> ${subtotal}</div>
             <PreviewPage cart={cart}/>
             {/* <PreviewPage user={user}/> */}
           </div>

@@ -44,9 +44,9 @@ export default function PreviewPage({cart}: {cart: Cart}) {
       })
   }
   return (
-    <form onSubmit={handleCheckout}>
-      <section>
-        <button type="submit" role="link">
+    <form onSubmit={handleCheckout} className=' md:w-1/2 '>
+      <section className=''>
+        <button type="submit" className='' role="link">
           Checkout
         </button>
       </section>
@@ -56,7 +56,7 @@ export default function PreviewPage({cart}: {cart: Cart}) {
             background: #ffffff;
             display: flex;
             flex-direction: column;
-            width: 400px;
+            
             height: 112px;
             border-radius: 6px;
             justify-content: space-between;
