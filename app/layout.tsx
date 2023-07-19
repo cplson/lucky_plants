@@ -27,8 +27,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const cookie = cookies()
-  const cookieList = cookie.getAll()
+  const cookie = cookies();
+  const cookieList = cookie.getAll();
   const cookieString = cookieList.map((c) => `${c.name}=${c.value}`).join("; ");
   return (
     <html
@@ -36,9 +36,9 @@ export default function RootLayout({
       id="root"
       className={`${cormorant.variable} ${inter.variable}`}
     >
-      <body className="flex-column justify-center p-8 font-sans bg-gradient-to-r from-lime-100 to-green-100  max-w-7xl mx-auto">
+      <body className="flex-column justify-center p-8 font-sans bg-gradient-to-r from-lime-100 to-green-100  max-w-7xl mx-auto ">
         {/* TOP MENU */}
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center invisible md:visible">
           <Link href="/home" className="">
             <h1 className="font-serif text-4xl font-semibold text-green-900">
               Lucky
@@ -48,19 +48,14 @@ export default function RootLayout({
           <div className="">
             <NavBar />
           </div>
-          <div className="flex justify-end">
-            {/* Social list */}
-            
-
-            {/* CART */}
-            <Link href="/cart">
-              <Cart cookieString={cookieString}/>
-            </Link>
-          </div>
+          {/* CART */}
+          <Link href="/cart">
+            <Cart cookieString={cookieString} />
+          </Link>
         </div>
         {children}
         <footer className="">
-        <Socials/>
+          <Socials />
         </footer>
       </body>
     </html>

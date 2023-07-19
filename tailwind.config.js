@@ -34,10 +34,10 @@ module.exports = {
     }
     },
     screens: {
-      'sm': '540px',
+      'sm': '500px',
       // => @media (min-width: 640px) { ... }
 
-      'md': '740px',
+      'md': '640px',
       // => @media (min-width: 740px) { ... }
 
       'lg': '845px',
