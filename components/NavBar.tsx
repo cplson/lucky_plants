@@ -9,10 +9,10 @@ const links: Link[] = [
   { text: "Contact", path: "/contact" },
 ];
 
-export default function NavBar() {
+export default function NavBar({isMobile}: {isMobile: boolean}) {
   return (
     <>
-    <ul className="flex flex-nowrap items-center">
+    <ul className="flex flex-col items-start md:flex-row md:items-center">
       {links.map((link) => {
         return <li className={"text-lg"}><NavLink link={link} /></li>;
       })}

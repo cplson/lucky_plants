@@ -48,7 +48,7 @@ export default function RootLayout({
             </Link>
             {/* NAVIGATION */}
             <div className="">
-              <NavBar />
+              <NavBar isMobile={false}/>
             </div>
             {/* CART */}
             <Link href="/cart" className="">
