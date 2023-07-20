@@ -1,4 +1,4 @@
-import { Instagram, Facebook, Twitter } from "react-feather";
+import { Instagram, Facebook, Twitter, Linkedin, GitHub } from "react-feather";
 import Link from "next/link";
 
 type SocialProps = {
@@ -10,19 +10,15 @@ export default function Socials() {
       <ul className="flex justify-center">
         <Link href="https://www.linkedin.com/in/james-jacobsen-67443126b/">
           <li className="mx-3">
-            <Instagram />
+            <Linkedin />
           </li>
         </Link>
-        <Link href="https://www.linkedin.com/in/james-jacobsen-67443126b/">
+        <Link href="https://github.com/cplson">
           <li className="mx-3">
-            <Facebook />
+            <GitHub />
           </li>
         </Link>
-        <Link href="https://www.linkedin.com/in/james-jacobsen-67443126b/">
-          <li className="mx-3">
-            <Twitter />
-          </li>
-        </Link>
+        
       </ul>
     </div>
   );
