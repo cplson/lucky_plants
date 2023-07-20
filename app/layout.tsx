@@ -5,8 +5,7 @@ import Socials from "@/components/Socials";
 import Cart from "@/components/Cart";
 import Link from "next/link";
 import { cookies } from "next/headers";
-import Button from "@/components/Button";
-import { Menu } from "react-feather";
+import DropdownMenu from "@/components/DropdownMenu";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -57,7 +56,7 @@ export default function RootLayout({
             </Link>
           </div>
           <div className="flex justify-between items-center md:invisible absolute w-full">
-            <button className="mr-12"><Menu className="" width={'40'} height={'40'}/></button>
+            <DropdownMenu />
             <Link href="/home" className="">
               <h1 className="font-serif text-4xl font-semibold text-green-900">
                 Lucky
