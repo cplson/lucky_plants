@@ -7,7 +7,12 @@ import { Product, CartItem } from "@prisma/client";
 import { cookies } from "next/headers";
 
 export const authenticateUser = async (req) => {
+  if (process.env.COOKIE_NAME) {
     return await validateJWT(req.cookies[process.env.COOKIE_NAME]);
+  }
+  else{
+    return undefined;
+  }
 };
 
 export const getCart = async (user: User) => {
@@ -16,8 +21,8 @@ export const getCart = async (user: User) => {
       shopperId: user.id,
     },
     include: {
-      items: true
-    }
+      items: true,
+    },
   });
 };
 
@@ -65,9 +70,8 @@ export async function deleteQuantity(
   for (let i = 0; i < quantity; i++) {
     await db.cartItem.delete({
       where: {
-        id: items[i].id
+        id: items[i].id,
       },
-      
     });
   }
 }
@@ -80,10 +84,10 @@ export const getData = async () => {
     },
     include: {
       items: {
-        include:{
-          product: true
-        }
-      }
+        include: {
+          product: true,
+        },
+      },
     },
   });
   return cart;

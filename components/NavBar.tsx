@@ -2,6 +2,7 @@ import { Link as LinkType } from "@/lib/types";
 import NavLink from "@/components/NavLink";
 import clsx from "clsx";
 import Link from "next/link";
+import SignoutBtn from "./SignoutBtn";
 
 const links: LinkType[] = [
   { text: "Shop", path: "/shop" },
@@ -25,7 +26,7 @@ export default function NavBar({ isMobile }: { isMobile: boolean }) {
           <>
             <hr className="w-full my-2" />
             <li className={"text-lg text-gray-600 hover:text-green-700"}>
-              <Link href="/signout">Sign Out</Link>
+              <SignoutBtn />
             </li>
           </>
         )}
