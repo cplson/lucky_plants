@@ -1,26 +1,21 @@
 "use client"
 
 import Link from "next/link"
+import { getSession, signOut } from "next-auth/react"
+import { useSession } from "next-auth/react"
 
-export default function SignoutBtn(){
+export default async function SignoutBtn(){
+    // const session = await getSession()
+    // console.log('session:', session)
 
-    const signout = async () => {
-        // const response = await fetch('/api/signout', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     }
-        // }).then(res => {
-        //     return res.json();
-        // }).catch(err => {
-        //     console.log(err);
-        // })
-
-        // console.log('response for signout:', response);
-    }
     return(
         <>
-            <Link href="/signin"><button onClick={signout}>Sign Out</button></Link>
+            {/* {
+                status == 'unauthenticated' ?
+                <Link href='/signin'><button>Sign In</button></Link> : */}
+                {/* <button onClick={() => signOut}>Sign Out</button>  */}
+            {/* } */}
+            <button>click me</button>
         </>
     )
 }
