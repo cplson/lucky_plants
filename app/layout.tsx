@@ -13,7 +13,7 @@ import Providers from "@/components/Providers";
 import options from "./api/auth/[...nextauth]/options";
 import {getServerSession} from "next-auth/next"
 import AuthProviders from "./context/AuthProvider"
-import SignoutBtn from "@/components/SignoutBtn";
+import SignIOBtn from "@/components/SignIOBtn";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -63,7 +63,7 @@ export default async function RootLayout({
             <Link href="/cart" className="">
               <Cart  />
             </Link>
-            <SignoutBtn />
+            <SignIOBtn />
           </div>
           <div className="flex justify-between items-center md:invisible absolute w-full">
             <DropdownMenu />
@@ -75,7 +75,7 @@ export default async function RootLayout({
             <Link href="/cart" className="">
               <Cart  />
             </Link>
-            <SignoutBtn />
+            <SignIOBtn />
           </div>
         </div>
         <div className="mt-20 w-full">{children}</div>

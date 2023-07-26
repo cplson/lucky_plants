@@ -14,8 +14,6 @@ export default function SignoutBtn(){
                 <button onClick={() => signOut()}>Sign Out</button> :
                 <Link href='/signin'><button>Sign In</button></Link> 
             }
-            {/* <button>click me</button> */}
-            {/* <button onClick={() => signOut()}>Sign Out</button>  */}
         </>
     )
 }
