@@ -6,11 +6,22 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { comparePasswords, hashPassword } from "@/lib/auth";
 
 const options: NextAuthOptions = {
-//   adapter: PrismaAdapter(db),
+  adapter: PrismaAdapter(db),
   session: {
+    strategy: 'jwt',
     maxAge: 30 * 24 * 60 * 60,
     updateAge: 24 * 60 * 60,
   },
+  callbacks: {
+    async jwt({ token, user }) {
+        return { ...token, ...user };
+    },
+    async session({ session, token, user }) {
+        // Send properties to the client, like an access_token from a provider.
+        session.user = token;
+        return session;
+    },
+},
   pages:{
     signIn: "/signin"
   },
@@ -34,7 +45,7 @@ const options: NextAuthOptions = {
       },
       async authorize(credentials) {
         // retrieve credentials here
-        console.log("inside auth", credentials);
+        // console.log("inside auth", credentials);
         const hashedPassword = await hashPassword(credentials!.password);
 
         try {
@@ -43,7 +54,6 @@ const options: NextAuthOptions = {
               email: credentials!.email,
             },
           });
-          console.log('after db query', user)
           const isUser = await comparePasswords(
             credentials!.password,
             user!.password

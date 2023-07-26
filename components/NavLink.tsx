@@ -1,12 +1,8 @@
-
 import Link from "next/link";
 import clsx from "clsx";
 import { LinkProps } from "@/lib/types";
 import { FC } from "react";
 
-
-// Each Navigation Link is returned from here
-// we use usePathname to determine if this is the Link that is active
 const NavLink: FC<LinkProps> = ({ link }) => {
   
  

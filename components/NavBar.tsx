@@ -17,7 +17,7 @@ export default function NavBar({ isMobile }: { isMobile: boolean }) {
       <ul className="flex flex-col items-start  md:flex-row md:items-center">
         {links.map((link) => {
           return (
-            <li className={"text-lg my-1 mx-0"}>
+            <li key={link.path} className={"text-lg my-1 mx-0"}>
               <NavLink link={link} />
             </li>
           );
@@ -26,7 +26,7 @@ export default function NavBar({ isMobile }: { isMobile: boolean }) {
           <>
             <hr className="w-full my-2" />
             <li className={"text-lg text-gray-600 hover:text-green-700"}>
-              <SignoutBtn />
+              <button>Sign Out</button>
             </li>
           </>
         )}

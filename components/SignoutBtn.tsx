@@ -4,18 +4,19 @@ import Link from "next/link"
 import { getSession, signOut } from "next-auth/react"
 import { useSession } from "next-auth/react"
 
-export default async function SignoutBtn(){
-    // const session = await getSession()
-    // console.log('session:', session)
-
+export default function SignoutBtn(){
+    const { data: session } = useSession()
+    console.log(session)
     return(
         <>
-            {/* {
-                status == 'unauthenticated' ?
-                <Link href='/signin'><button>Sign In</button></Link> : */}
-                {/* <button onClick={() => signOut}>Sign Out</button>  */}
-            {/* } */}
-            <button>click me</button>
+            {
+                session ?
+                <button onClick={() => signOut()}>Sign Out</button> :
+                <Link href='/signin'><button>Sign In</button></Link> 
+            }
+            {/* <button>click me</button> */}
+            {/* <button onClick={() => signOut()}>Sign Out</button>  */}
         </>
     )
 }
+

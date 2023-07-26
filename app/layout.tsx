@@ -60,9 +60,9 @@ export default async function RootLayout({
               <NavBar isMobile={false}/>
             </div>
             {/* CART */}
-            {/* <Link href="/cart" className="">
+            <Link href="/cart" className="">
               <Cart  />
-            </Link> */}
+            </Link>
             <SignoutBtn />
           </div>
           <div className="flex justify-between items-center md:invisible absolute w-full">
@@ -72,9 +72,9 @@ export default async function RootLayout({
                 Lucky
               </h1>
             </Link>
-            {/* <Link href="/cart" className="">
+            <Link href="/cart" className="">
               <Cart  />
-            </Link> */}
+            </Link>
             <SignoutBtn />
           </div>
         </div>
