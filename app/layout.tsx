@@ -6,7 +6,13 @@ import Cart from "@/components/Cart";
 import Link from "next/link";
 import { cookies } from "next/headers";
 import DropdownMenu from "@/components/DropdownMenu";
-
+import { SessionProvider } from "next-auth/react";
+import { Session } from "next-auth";
+import {AppProps} from "next/app"
+import Providers from "@/components/Providers";
+import options from "./api/auth/[...nextauth]/options";
+import {getServerSession} from "next-auth/next"
+import AuthProviders from "./context/AuthProvider"
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
@@ -25,12 +31,14 @@ export const metadata = {
 
 export default function RootLayout({
   children,
+  authModal,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
+  authModal: React.ReactNode
 }) {
-  const cookie = cookies();
-  const cookieList = cookie.getAll();
-  const cookieString = cookieList.map((c) => `${c.name}=${c.value}`).join("; ");
+  // const cookie = cookies();
+  // const cookieList = cookie.getAll();
+  // const cookieString = cookieList.map((c) => `${c.name}=${c.value}`).join("; ");
   return (
     <html
       lang="en"
@@ -38,6 +46,7 @@ export default function RootLayout({
       className={`${cormorant.variable} ${inter.variable}`}
     >
       <body className="flex-column justify-center p-4 sm:w-4/5 font-sans bg-gradient-to-r from-lime-100 to-green-100  max-w-7xl mx-auto">
+        <AuthProviders>
         {/* TOP MENU */}
         <div className="relative">
           <div className="flex justify-between items-center invisible md:visible absolute w-full">
@@ -52,7 +61,7 @@ export default function RootLayout({
             </div>
             {/* CART */}
             <Link href="/cart" className="">
-              <Cart cookieString={cookieString} />
+              <Cart  />
             </Link>
           </div>
           <div className="flex justify-between items-center md:invisible absolute w-full">
@@ -63,7 +72,7 @@ export default function RootLayout({
               </h1>
             </Link>
             <Link href="/cart" className="">
-              <Cart cookieString={cookieString} />
+              <Cart  />
             </Link>
           </div>
         </div>
@@ -71,6 +80,7 @@ export default function RootLayout({
         <footer className="">
           <Socials />
         </footer>
+        </AuthProviders>
       </body>
     </html>
   );

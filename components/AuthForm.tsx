@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 import { register, signin } from '@/lib/api';
 import { useCallback, useState } from "react";
 import Link from "next/link";
+import {useSession, signIn, signOut} from "next-auth/react"
+
 
 // Content for register page
 const registerContent = {
@@ -34,7 +36,7 @@ const initial = { email: "", password: "", firstName: "", lastName: "" };
 export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
   const [formState, setFormState] = useState({ ...initial });
   const [error, setError] = useState("");
-
+  const [isLoading, setIsLoading] = useState(false)
   const router = useRouter();
 
   const handleSubmit = useCallback(
@@ -140,9 +142,10 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
               </span>
             </div>
             <div>
-              <Button intent="secondary">
+              {/* <Button intent="secondary">
                 {content.buttonText}
-              </Button>
+              </Button> */}
+              <button onClick={() => signIn()}>Sign in</button>
             </div>
           </div>
         </form>
