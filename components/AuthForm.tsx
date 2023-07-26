@@ -8,6 +8,7 @@ import { register, signin } from '@/lib/api';
 import { useCallback, useState } from "react";
 import Link from "next/link";
 import {useSession, signIn, signOut} from "next-auth/react"
+import Email from "next-auth/providers/email";
 
 
 // Content for register page
@@ -47,7 +48,7 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
         if (mode === "register") {
           await register(formState);
         } else {
-          await signin(formState);
+          await signIn('credentials', {email: formState.email, password: formState.password});
         }
         router.replace("/home");
       } catch (e) {
@@ -142,10 +143,10 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
               </span>
             </div>
             <div>
-              {/* <Button intent="secondary">
+              <Button intent="secondary">
                 {content.buttonText}
-              </Button> */}
-              <button onClick={() => signIn()}>Sign in</button>
+              </Button>
+              {/* <button onClick={() => signIn()}>Sign in</button> */}
             </div>
           </div>
         </form>

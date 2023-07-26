@@ -12,6 +12,9 @@ const options: NextAuthOptions = {
     maxAge: 30 * 24 * 60 * 60,
     updateAge: 24 * 60 * 60,
   },
+  pages:{
+    signIn: "/signin"
+  },
   providers: [
     GitHubProvider({
       clientId: process.env.GITHUB_ID as string,
@@ -47,6 +50,7 @@ const options: NextAuthOptions = {
             user!.password
           );
           if (isUser) {
+            console.log('signin successful');
             return user;
           }
          
