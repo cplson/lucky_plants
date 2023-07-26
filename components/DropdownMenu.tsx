@@ -1,7 +1,7 @@
 "use client";
 
 import { Menu, X } from "react-feather";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import NavBar from "./NavBar";
 import clsx from "clsx";
 

@@ -1,9 +1,7 @@
-import { Instagram, Facebook, Twitter, Linkedin, GitHub } from "react-feather";
+import { Linkedin, GitHub } from "react-feather";
 import Link from "next/link";
 
-type SocialProps = {
-  className?: string;
-};
+
 export default function Socials() {
   return (
     <div className="w-full">

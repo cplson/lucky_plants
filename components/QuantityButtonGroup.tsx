@@ -3,7 +3,6 @@ import { ProductProps } from "@/lib/types";
 import { FC, startTransition, useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
-import { addItemToCart } from "@/lib/api";
 import { Product } from "@prisma/client";
 import { useRouter } from "next/navigation";
 

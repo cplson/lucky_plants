@@ -1,7 +1,5 @@
 import { Link as LinkType } from "@/lib/types";
 import NavLink from "@/components/NavLink";
-import clsx from "clsx";
-import Link from "next/link";
 import SignIOBtn from "./SignIOBtn";
 
 const links: LinkType[] = [

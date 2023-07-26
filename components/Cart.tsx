@@ -1,9 +1,7 @@
 "use client";
-import { useEffect } from "react";
 import { ShoppingCart } from "react-feather";
 import { useRouter } from "next/navigation";
 import clsx from "clsx";
-import { authenticateUser } from "@/lib/dbHelpers";
 import { Cart } from "@prisma/client";
 
 export default async function Cart() {

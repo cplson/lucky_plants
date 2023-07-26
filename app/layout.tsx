@@ -4,14 +4,8 @@ import { Inter, Cormorant } from "next/font/google";
 import Socials from "@/components/Socials";
 import Cart from "@/components/Cart";
 import Link from "next/link";
-import { cookies } from "next/headers";
 import DropdownMenu from "@/components/DropdownMenu";
-import { SessionProvider } from "next-auth/react";
-import { Session } from "next-auth";
-import {AppProps} from "next/app"
-import Providers from "@/components/Providers";
-import options from "./api/auth/[...nextauth]/options";
-import {getServerSession} from "next-auth/next"
+
 import AuthProviders from "./context/AuthProvider"
 import SignIOBtn from "@/components/SignIOBtn";
 

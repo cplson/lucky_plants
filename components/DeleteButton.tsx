@@ -3,7 +3,6 @@
 import { Cart, Product } from "@prisma/client"
 import Button from "./Button"
 import { FC } from "react"
-import { db } from "@/lib/db"
 import { removeItems } from "@/lib/api";
 
 

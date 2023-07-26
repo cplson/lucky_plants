@@ -1,11 +1,12 @@
 "use client"
 
 import Link from "next/link"
-import { getSession, signOut } from "next-auth/react"
-import { useSession } from "next-auth/react"
+import { useSession, signOut } from "next-auth/react"
+import { useState } from "react"
 
 export default function SignoutBtn(){
     const { data: session } = useSession()
+    const [isLoading, setIsLoading] = useState()
     console.log(session)
     return(
         <>

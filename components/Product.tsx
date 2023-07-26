@@ -1,7 +1,5 @@
 import Image from "next/image";
-import CartButton from "./CartButton";
 import { db } from "@/lib/db";
-import { cookies } from "next/headers";
 import { Product } from "@prisma/client";
 
 async function Product({ product }: { product: Product }) {

@@ -4,11 +4,10 @@ import Button from "@/components/Button";
 import Card from "./Card";
 import Input from "./Input";
 import { useRouter } from "next/navigation";
-import { register, signin } from '@/lib/api';
+import { register } from '@/lib/api';
 import { useCallback, useState } from "react";
 import Link from "next/link";
-import {useSession, signIn, signOut} from "next-auth/react"
-import Email from "next-auth/providers/email";
+import {signIn} from "next-auth/react"
 
 
 // Content for register page
