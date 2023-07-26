@@ -4,10 +4,9 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { db } from "@/lib/db";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { comparePasswords, hashPassword } from "@/lib/auth";
-import { Prisma } from "@prisma/client";
 
 const options: NextAuthOptions = {
-  adapter: PrismaAdapter(db),
+//   adapter: PrismaAdapter(db),
   session: {
     maxAge: 30 * 24 * 60 * 60,
     updateAge: 24 * 60 * 60,
@@ -39,18 +38,17 @@ const options: NextAuthOptions = {
         const hashedPassword = await hashPassword(credentials!.password);
 
         try {
-          const user = await db.user.findUniqueOrThrow({
+          const user = await db.user.findUnique({
             where: {
               email: credentials!.email,
             },
           });
-
+          console.log('after db query', user)
           const isUser = await comparePasswords(
             credentials!.password,
             user!.password
           );
           if (isUser) {
-            console.log('signin successful');
             return user;
           }
          
@@ -60,6 +58,7 @@ const options: NextAuthOptions = {
           throw e;
         }
         return null;
+        
       },
     }),
   ],

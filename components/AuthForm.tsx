@@ -48,9 +48,11 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
         if (mode === "register") {
           await register(formState);
         } else {
-          await signIn('credentials', {email: formState.email, password: formState.password});
+          const user = await signIn('credentials', {email: formState.email, password: formState.password, callbackUrl: 'http://localhost:3000/home'});
+          console.log('in authform:', user)
         }
-        router.replace("/home");
+        // console.log('before router.replace');
+        // router.replace("/home");
       } catch (e) {
         setError(`Could not ${mode}`);
       } finally {
