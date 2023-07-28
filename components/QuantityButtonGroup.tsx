@@ -10,14 +10,14 @@ import { redirect } from "next/navigation";
 
 const QuantityButtonGroup: FC<ProductProps> = ({
   product,
+  id,
   count,
   closeModal,
 }) => {
   const item = useState(null)
-  const session = useSession()
   const [quantity, setQuantity] = useState(count);
   const router = useRouter();
-
+  console.log('id in QBG:', id)
  
   const increment = () => {
     if(typeof quantity == 'number'){
@@ -36,8 +36,7 @@ const QuantityButtonGroup: FC<ProductProps> = ({
     quantity: number,
     closeModal: () => void
   ) {
-    // const session = useSession();
-    // if(!session) redirect('/signin')
+    console.log('quantity is:', quantity);
     const data = await fetch("http://localhost:3000/api/updateCart", {
       method: "POST",
       headers: {
@@ -47,6 +46,8 @@ const QuantityButtonGroup: FC<ProductProps> = ({
       body: JSON.stringify({
         product: product,
         quantity: quantity,
+        id: id,
+        
       }),
     }).then(res => {
       startTransition(() => {

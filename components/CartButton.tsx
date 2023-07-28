@@ -5,13 +5,13 @@ import { useState, FC } from "react";
 import Modal from "react-modal";
 import { ProductProps } from "@/lib/types";
 import Image from "next/image";
-import { useSession } from "next-auth/react";
+import { getSession } from "next-auth/react";
 // import { redirect } from "next/navigation";
 import { useRouter } from "next/navigation";
 
 Modal.setAppElement("#root");
 
-const CartButton: FC<ProductProps> = ({ product, count, className }) => {
+const CartButton: FC<ProductProps> = ({ product, session, count, className }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const router = useRouter()
   const customStyles = {
@@ -25,8 +25,8 @@ const CartButton: FC<ProductProps> = ({ product, count, className }) => {
       background: "rgb(249 250 251)",
     },
   };
-
-  const { data: session } = useSession();
+  console.log('id in CartButton:', session?.user?.id)
+  const id = session?.user?.id
   // console.log('cartButton session:', session)
   function openModal() {
     if(!session){
@@ -85,6 +85,7 @@ const CartButton: FC<ProductProps> = ({ product, count, className }) => {
           {session && (
             <QuantityButtonGroup
               product={product}
+              id={id}
               count={count}
               closeModal={closeModal}
             />

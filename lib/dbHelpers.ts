@@ -3,7 +3,7 @@ import { User } from "@/lib/types";
 import { NextApiRequest } from "next";
 import { getUserFromCookie, validateJWT } from "@/lib/auth";
 import { db } from "./db";
-import { Product, CartItem } from "@prisma/client";
+import { Product, CartItem, Cart } from "@prisma/client";
 import { cookies } from "next/headers";
 
 export const authenticateUser = async (req) => {
@@ -15,10 +15,10 @@ export const authenticateUser = async (req) => {
   }
 };
 
-export const getCart = async (user: User) => {
+export const getCart = async (id: string) => {
   return await db.cart.findUnique({
     where: {
-      shopperId: user.id,
+      shopperId: id,
     },
     include: {
       items: true,
@@ -26,13 +26,14 @@ export const getCart = async (user: User) => {
   });
 };
 
-export const getItems = async (cartId: string, productId: string) => {
+export const getItems = async (id: string, productId: string) => {
   // console.log("cartId is:", cartId);
   // console.log("productId is:", productId);
 
+  const cart = await getCart(id)
   const items = await db.cartItem.findMany({
     where: {
-      cartId: cartId,
+      cartId: cart!.id,
       productId: productId,
     },
   });
@@ -44,13 +45,14 @@ export const getItems = async (cartId: string, productId: string) => {
 export const addQuantity = async (
   quantity: number,
   product: Product,
-  cartId: string
+  id: string,
+  cart: Cart
 ) => {
   for (let i = 0; i < quantity; i++) {
     console.log("loop");
     await db.cartItem.create({
       data: {
-        cartId: cartId,
+        cartId: cart!.id,
         productId: product.id,
       },
     });

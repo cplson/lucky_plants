@@ -5,6 +5,7 @@ import {
   JSXElementConstructor,
 } from "react";
 import { Cart as CartModel, Product } from "@prisma/client";
+import { Session } from "next-auth";
 
 export type Link = {
   path: string;
@@ -31,6 +32,8 @@ export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
 
 export type ProductProps = {
   product: Product;
+  session?: Session,
+  id?: string,
   count: number,
   text: string;
   className?: string;
