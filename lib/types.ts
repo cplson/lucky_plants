@@ -1,19 +1,24 @@
-import { ReactNode, InputHTMLAttributes } from "react"
-import { Cart as CartModel, Product } from "@prisma/client"
+import {
+  ReactNode,
+  InputHTMLAttributes,
+  ReactElement,
+  JSXElementConstructor,
+} from "react";
+import { Cart as CartModel, Product } from "@prisma/client";
 
 export type Link = {
-    path: string
-    text: string
-}
+  path: string;
+  text: string;
+};
 
 export type LinkProps = {
-    link: Link
-}
+  link: Link;
+};
 
 export type CardProps = {
-    className?: string
-    children: ReactNode
-}
+  className?: string;
+  children: ReactNode;
+};
 
 // -InputHTMLAttributes is used to access type definitions for HTML
 //  input attributes from React
@@ -21,29 +26,29 @@ export type CardProps = {
 //  allowing us to use any valid input element attribute
 // -className ensures we can optionaly apply tailwind classes to the input
 export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
-    className?: string
-}
+  className?: string;
+};
 
 export type ProductProps = {
-    product: Product
-    count: number
-    text: string,
-    className?: string,
-    closeModal?: () => void,
-}
+  product: Product;
+  count: number,
+  text: string;
+  className?: string;
+  closeModal?: () => void;
+};
 
 export type NewUser = {
-    firstName: string
-    lastName: string
-    email: string
-    password: string
-}
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+};
 
 export type User = {
-    id: string
-    email: string
-    password: string
-}
+  id: string;
+  email: string;
+  password: string;
+};
 
 // export type Product = {
 //     id: string;
@@ -54,11 +59,11 @@ export type User = {
 // }
 
 export type CartItem = {
-    id: string;
-    name: string;
-    price: number;
-    productId: string;
-    cartId: string;
-}
+  id: string;
+  name: string;
+  price: number;
+  productId: string;
+  cartId: string;
+};
 
-export type Cart = CartModel
+export type Cart = CartModel;

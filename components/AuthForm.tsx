@@ -47,7 +47,7 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
         if (mode === "register") {
           await register(formState);
         } else {
-          const user = await signIn('credentials', {email: formState.email, password: formState.password, callbackUrl: 'http://localhost:3000/home'});
+          const user = await signIn('credentials', {email: formState.email, password: formState.password, callbackUrl: 'http://localhost:3000/shop'});
         }
         
       } catch (e) {

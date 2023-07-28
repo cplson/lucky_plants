@@ -6,11 +6,14 @@ import Modal from "react-modal";
 import { ProductProps } from "@/lib/types";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
+// import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 Modal.setAppElement("#root");
 
-const CartButton: FC<ProductProps> = ({ product, className }) => {
+const CartButton: FC<ProductProps> = ({ product, count, className }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
+  const router = useRouter()
   const customStyles = {
     content: {
       top: "50%",
@@ -26,7 +29,12 @@ const CartButton: FC<ProductProps> = ({ product, className }) => {
   const { data: session } = useSession();
   // console.log('cartButton session:', session)
   function openModal() {
-    setIsOpen(true);
+    if(!session){
+      router.push('/signin?callbackurl=/shop')
+    }
+    else{
+      setIsOpen(true);
+    }
   }
 
   function closeModal() {
@@ -35,11 +43,10 @@ const CartButton: FC<ProductProps> = ({ product, className }) => {
 
   return (
     <div>
-      {session && (
-        <Button className={className} size={"small"} onClick={openModal}>
-          Add To Cart
-        </Button>
-      )}
+      <Button className={className} size={"small"} onClick={openModal}>
+        Add To Cart
+      </Button>
+
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
@@ -75,9 +82,13 @@ const CartButton: FC<ProductProps> = ({ product, className }) => {
               )}
             </p>
           </div>
-          {session &&
-          <QuantityButtonGroup product={product} closeModal={closeModal} />
-          }
+          {session && (
+            <QuantityButtonGroup
+              product={product}
+              count={count}
+              closeModal={closeModal}
+            />
+          )}
         </div>
       </Modal>
     </div>

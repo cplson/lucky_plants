@@ -6,28 +6,27 @@ import Button from "./Button";
 import { Product } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { db } from "@/lib/db";
-import { Session } from "next-auth";
-import { getItemFromCart } from "@/lib/api";
-import { useQuery } from "@tanstack/react-query";
-
+import { redirect } from "next/navigation";
 
 const QuantityButtonGroup: FC<ProductProps> = ({
   product,
+  count,
   closeModal,
 }) => {
   const item = useState(null)
   const session = useSession()
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(count);
   const router = useRouter();
 
  
   const increment = () => {
-    setQuantity(quantity + 1);
+    if(typeof quantity == 'number'){
+      setQuantity(quantity + 1);
+    }
   };
 
   const decrement = () => {
-    if (quantity > 0) {
+    if (typeof quantity == 'number' && quantity > 0) {
       setQuantity(quantity - 1);
     }
   };
@@ -37,6 +36,8 @@ const QuantityButtonGroup: FC<ProductProps> = ({
     quantity: number,
     closeModal: () => void
   ) {
+    // const session = useSession();
+    // if(!session) redirect('/signin')
     const data = await fetch("http://localhost:3000/api/updateCart", {
       method: "POST",
       headers: {

@@ -32,7 +32,7 @@ async function Product({ product }: { product: Product }) {
           {product.price}
         </p>
 
-        <CartButton product={product}/>
+        <CartButton product={product} count={count as number}/>
       </div>
     </div>
   );
@@ -62,10 +62,10 @@ async function Product({ product }: { product: Product }) {
 
 const getData = async (session: Session | null, product: Product) => {
   if(session){
-    console.log('productlist:', session)
+    // console.log('productlist:', session)
     return await getItemFromCart(session!.user!.id, product.id)
   }
-  return undefined
+  return 0
 }
 
 export default Product;
