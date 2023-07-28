@@ -14,11 +14,23 @@ const options: NextAuthOptions = {
   },
   callbacks: {
     async jwt({ token, user }) {
-        return { ...token, ...user };
+        
+        
+        const thisUser = await db.user.findUnique({
+          where:{
+            id: token.sub
+          }
+        })
+        // console.log('thisUser in token:', thisUser)
+        // console.log('token in token:', token)
+        token.name = thisUser?.firstName
+        return { ...token, id: thisUser!.id };
     },
     async session({ session, token, user }) {
         // Send properties to the client, like an access_token from a provider.
+        // console.log('token in session:', token);
         session.user = token;
+        // console.log('session in session:', session)
         return session;
     },
 },
@@ -49,17 +61,25 @@ const options: NextAuthOptions = {
         const hashedPassword = await hashPassword(credentials!.password);
 
         try {
-          const user = await db.user.findUnique({
+          const user = await db.user.findUniqueOrThrow({
             where: {
               email: credentials!.email,
             },
+            select:{
+              firstName: true,
+              password: true,
+              email: true,
+              id: true
+            }
           });
+          // console.log('user', user);
           const isUser = await comparePasswords(
             credentials!.password,
             user!.password
           );
+          
           if (isUser) {
-            return user;
+            return { id: user.id};
           }
          
         } catch (e) {

@@ -1,6 +1,7 @@
 // Fetcher is our main API handler
 import { NewUser, User } from "./types"
 import { Product } from "@prisma/client"
+import { Session } from "next-auth"
 import { FC } from "react"
 
 type ItemInfo = {
@@ -28,9 +29,8 @@ export const fetcher: FC<FetchData> = async ({ url, method, body, json = true })
         throw new Error("API error");
     }
 
-    if (json) {
-        const data = await res.json();
-        return data.data;
+    if (json) {  
+        return res.json();
     }
 }
 
@@ -46,9 +46,9 @@ export const signin = (user: User) => {
 //     return fetcher({url: '/api/updateCart', method: 'post', body: data})
 // }
 
-// export const getItemFromCart = (id: string) => {
-//     return fetcher({url: '/api/getItemFromCart', method: 'post', body: id})
-// }
+export const getItemFromCart = (id: string) => {
+    return fetcher({url: `http://localhost:3000/api/getItemsFromCart?id=${id}`, method: 'GET'})
+}
 
 export const authUser = () => {
     return fetcher({url: '/api/authUser', method: 'get'})

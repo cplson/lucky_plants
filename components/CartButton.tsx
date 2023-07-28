@@ -5,11 +5,11 @@ import { useState, FC } from "react";
 import Modal from "react-modal";
 import { ProductProps } from "@/lib/types";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 
 Modal.setAppElement("#root");
 
-
-const CartButton: FC<ProductProps> = ({ product, text, count, className}) => {
+const CartButton: FC<ProductProps> = ({ product, className }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const customStyles = {
     content: {
@@ -23,6 +23,8 @@ const CartButton: FC<ProductProps> = ({ product, text, count, className}) => {
     },
   };
 
+  const { data: session } = useSession();
+  // console.log('cartButton session:', session)
   function openModal() {
     setIsOpen(true);
   }
@@ -33,7 +35,11 @@ const CartButton: FC<ProductProps> = ({ product, text, count, className}) => {
 
   return (
     <div>
-      <Button className={className} size={'small'} onClick={openModal}>{text}</Button>
+      {session && (
+        <Button className={className} size={"small"} onClick={openModal}>
+          Add To Cart
+        </Button>
+      )}
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
@@ -59,13 +65,19 @@ const CartButton: FC<ProductProps> = ({ product, text, count, className}) => {
             </p>
             <p>
               {product.stock > 5 ? (
-                <span className="text-lg text-green-700 font-semibold">In Stock</span>
+                <span className="text-lg text-green-700 font-semibold">
+                  In Stock
+                </span>
               ) : (
-                <span className="text-xl text-yellow-500 font-semibold">{product.stock} Left</span>
+                <span className="text-xl text-yellow-500 font-semibold">
+                  {product.stock} Left
+                </span>
               )}
             </p>
           </div>
-          <QuantityButtonGroup product={product}  count={count} closeModal={closeModal}/>
+          {session &&
+          <QuantityButtonGroup product={product} closeModal={closeModal} />
+          }
         </div>
       </Modal>
     </div>

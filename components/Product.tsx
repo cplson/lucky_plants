@@ -1,6 +1,9 @@
 import Image from "next/image";
 import { db } from "@/lib/db";
 import { Product } from "@prisma/client";
+import CartButton from "./CartButton";
+import { getServerSession } from "next-auth";
+import options from "@/app/api/auth/[...nextauth]/options";
 
 async function Product({ product }: { product: Product }) {
   // const itemCount = await getData(product.id);
@@ -23,11 +26,8 @@ async function Product({ product }: { product: Product }) {
           <span className="mr-1">$</span>
           {product.price}
         </p>
-        {/* {product.stock > 0 ? (
-          <CartButton product={product} text={'ADD TO CART'} count={itemCount} />
-        ) : (
-          <p className="text-3xl font-bold text-amber-700">Sold Out</p>
-        )} */}
+
+        <CartButton product={product}/>
       </div>
     </div>
   );
@@ -36,7 +36,6 @@ async function Product({ product }: { product: Product }) {
 // TODO: FIND A WAY TO MAKE THIS NEVER CACHE
 //        -will probably have use fetch() and then use prisma client in the api
 const getData = async (id: string) => {
-  
   const cart = await db.cart.findUnique({
     where: {
       shopperId: user?.id,
