@@ -1,14 +1,9 @@
 import { db } from "@/lib/db";
 import Product from "@/components/Product";
-import { getItemFromCart } from "@/lib/api";
-import { getServerSession } from "next-auth";
-import options from "@/app/api/auth/[...nextauth]/options";
 
 export default async function ProductList() {
   const products = await getProducts();
-  const items = await getData()
   
-  console.log('items in productList:', items)
   
   return (
     
@@ -26,11 +21,4 @@ async function getProducts() {
   return result;
 }
 
-const getData = async () => {
-  const session = await getServerSession(options)
-  if(session){
-    console.log('productlist:', session)
-    return await getItemFromCart(session!.user!.id)
-  }
-  return undefined
-}
+

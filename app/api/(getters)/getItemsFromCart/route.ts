@@ -2,26 +2,30 @@ import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {
-  const {searchParams} = new URL(req.url);
-  const id = searchParams.get('id');
-  
-    const user = await db.user.findUnique({
-      where: {
-        id: id!,
-      },
-      include: {
-        cart: {
-          include: {
-            items: true,
-          },
+  const { searchParams } = new URL(req.url);
+  const userId = searchParams.get("userId");
+  const productId = searchParams.get("productId");
+
+  const user = await db.user.findUnique({
+    where: {
+      id: userId!,
+    },
+    include: {
+      cart: {
+        include: {
+          items: true,
         },
       },
-    });
-    if(user){
-      console.log('user at endpoint:', user.cart)
-      const items = user.cart?.items
-      return NextResponse.json(items)
-    }
-  
+    },
+  });
+
+  if (user) {
+    const quantity = user?.cart!.items.filter(
+      (item) => item.id === productId
+    ).length;
+    // console.log("quantity is:", quantity);
+    return NextResponse.json(quantity);
+  }
+
   return new Response("Could not fetch items", { status: 500 });
 }
