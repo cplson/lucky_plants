@@ -33,7 +33,7 @@ export default async function handler(
         console.log('uniqueItems:', uniqueItems)
   if (req.method === 'POST') {
     try {
-        console.log('before session')
+        console.log('before session', req.headers.origin)
       // Create Checkout Sessions from body params.
       const session = await stripe.checkout.sessions.create({
         line_items: uniqueItems.map(item => {
@@ -50,8 +50,8 @@ export default async function handler(
         }),
         mode: 'payment',
         payment_method_types: ['card'],
-        success_url: `${req.headers.origin}/?success=true`,
-        cancel_url: `${req.headers.origin}/?canceled=true`,
+        success_url: `${req.headers.origin}/shop/?success=true`,
+        cancel_url: `${req.headers.origin}/cart/?canceled=true`,
       });
       res.json({url: session.url})
     } catch (err) {

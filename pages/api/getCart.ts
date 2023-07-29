@@ -1,27 +1,26 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { validateJWT, getUserFromCookie } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { authenticateUser, getData } from "@/lib/dbHelpers";
+import options from "@/app/api/auth/[...nextauth]/options";
+import { getServerSession } from "next-auth/next";
 
-export default async function getCart(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-    const user = await authenticateUser(req)
-    // console.log(user)
-    
-      const cart = await db.cart.findFirstOrThrow({
-        where:{
-            shopperId: user.id
-        },
+export default async function getCart(req: NextApiRequest, res: NextApiResponse) {
+//   const {searchParams} = new URL(req.url);
+// const id = searchParams.get('id');
+// console.log('inside getCart()')
+const {id} = req.query;
+console.log('id in getCart():', id)
+
+  const cart = await db.cart.findUniqueOrThrow({
+    where: {
+      shopperId: id!,
+    },
+    include: {
+      items: {
         include: {
-            items: {
-                include:{
-                    product: true
-                }
-            }
-        }
-      })
-    res.send(cart);
-  
+          product: true,
+        },
+      },
+    },
+  });
+  res.json(cart.items);
 }

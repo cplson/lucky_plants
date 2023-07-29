@@ -1,6 +1,7 @@
 import { Link as LinkType } from "@/lib/types";
 import NavLink from "@/components/NavLink";
 import SignIOBtn from "./SignIOBtn";
+import Cart from "./Cart";
 
 const links: LinkType[] = [
   { text: "Shop", path: "/shop" },
@@ -12,7 +13,7 @@ const links: LinkType[] = [
 export default function NavBar({ isMobile }: { isMobile: boolean }) {
   return (
     <>
-      <ul className="flex flex-col items-start  md:flex-row md:items-center">
+      <ul className="flex flex-col items-start  lg:flex-row lg:items-center">
         {links.map((link) => {
           return (
             <li key={link.path} className={"text-lg my-1 mx-0"}>
@@ -23,6 +24,7 @@ export default function NavBar({ isMobile }: { isMobile: boolean }) {
         {isMobile && (
           <>
             <hr className="w-full my-2" />
+            
             <li className={"text-lg text-gray-600 hover:text-green-700"}>
               <SignIOBtn />
             </li>

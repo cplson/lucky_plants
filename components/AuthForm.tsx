@@ -67,11 +67,11 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
   const content = mode === 'register' ? registerContent : signinContent;
 
   return(
-    <Card className=''>
+    <Card className='max-w-2xl mx-auto'>
       <div className="w-full">
         <div className="text-center">
           <h2 className="text-3xl mb-2">{content.header}</h2>
-          <p className="tex-lg text-black/25">{content.subheader}</p>
+          <p className="tex-lg text-black/40">{content.subheader}</p>
         </div>
         <form onSubmit={handleSubmit} className="py-10 w-full">
           {mode === "register" && (
@@ -84,7 +84,7 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
                   required
                   placeholder="First Name"
                   value={formState.firstName}
-                  className="border-solid border-gray border-2 px-6 py-2 text-lg rounded-3xl w-full"
+                  className="border-solid border-gray border-2 px-6 py-2 text-lg rounded-xl w-full"
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     setFormState((s) => ({ ...s, firstName: e.target.value }))
                   }
@@ -96,7 +96,7 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
                   required
                   placeholder="Last Name"
                   value={formState.lastName}
-                  className="border-solid border-gray border-2 px-6 py-2 text-lg rounded-3xl w-full"
+                  className="border-solid border-gray border-2 px-6 py-2 text-lg rounded-xl w-full"
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     setFormState((s) => ({ ...s, lastName: e.target.value }))
                   }
@@ -111,7 +111,7 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
               type="email"
               placeholder="Email"
               value={formState.email}
-              className="border-solid border-gray border-2 px-6 py-2 text-lg rounded-3xl w-full"
+              className="border-solid border-gray border-2 px-6 py-2 text-lg rounded-xl w-full"
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setFormState((s) => ({ ...s, email: e.target.value }))
               }
@@ -124,7 +124,7 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
               value={formState.password}
               type="password"
               placeholder="Password"
-              className="border-solid border-gray border-2 px-6 py-2 text-lg rounded-3xl w-full"
+              className="border-solid border-gray border-2 px-6 py-2 text-lg rounded-xl w-full"
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setFormState((s) => ({ ...s, password: e.target.value }))
               }
@@ -142,7 +142,7 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
               </span>
             </div>
             <div>
-              <Button intent="secondary">
+              <Button intent="tertiary">
                 {content.buttonText}
               </Button>
               {/* <button onClick={() => signIn()}>Sign in</button> */}
