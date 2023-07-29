@@ -49,7 +49,7 @@ export default async function Cart() {
             const count = cart.items.filter(item => product.product.id === item.productId).length
             console.log('count:', count)
             console.log('product:', product.product)
-            console.log('userId:', session?.user.id)
+            console.log('userId:', session!.user!.id)
 
            return <CartProduct key={product.id} product={product.product} count={count} userId={session!.user!.id}/>
           }

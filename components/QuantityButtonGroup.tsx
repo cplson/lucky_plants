@@ -33,6 +33,8 @@ const QuantityButtonGroup: FC<ProductProps> = ({
     quantity: number,
     closeModal: () => void
   ) {
+    closeModal();
+
     const data = await fetch("http://localhost:3000/api/updateCart", {
       method: "POST",
       headers: {
@@ -53,7 +55,6 @@ const QuantityButtonGroup: FC<ProductProps> = ({
     }).catch(err => {
       console.log(err)
     })
-    closeModal();
   }
   return (
     <>

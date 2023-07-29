@@ -80,3 +80,4 @@ export const getItemsWithProduct = async (id: string) => {
   });
   return cart;
 };
+
