@@ -78,11 +78,10 @@ export async function deleteQuantity(
   }
 }
 
-export const getData = async () => {
-  const user = await getUserFromCookie(cookies());
+export const getItemsWithProduct = async (id: string) => {
   const cart = await db.cart.findFirstOrThrow({
     where: {
-      shopperId: user?.id,
+      shopperId: id,
     },
     include: {
       items: {

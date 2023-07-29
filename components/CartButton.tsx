@@ -5,14 +5,15 @@ import { useState, FC } from "react";
 import Modal from "react-modal";
 import { ProductProps } from "@/lib/types";
 import Image from "next/image";
-import { getSession } from "next-auth/react";
-// import { redirect } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 Modal.setAppElement("#root");
 
-const CartButton: FC<ProductProps> = ({ product, session, count, className }) => {
+const CartButton: FC<ProductProps> = ({ product, count, className }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
+  const {data: session} = useSession()
+  console.log('session in cartButton:', session)
   const router = useRouter()
   const customStyles = {
     content: {
@@ -25,9 +26,7 @@ const CartButton: FC<ProductProps> = ({ product, session, count, className }) =>
       background: "rgb(249 250 251)",
     },
   };
-  console.log('id in CartButton:', session?.user?.id)
   const id = session?.user?.id
-  // console.log('cartButton session:', session)
   function openModal() {
     if(!session){
       router.push('/signin?callbackurl=/shop')

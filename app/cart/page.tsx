@@ -3,13 +3,16 @@ import { db } from "@/lib/db";
 import { Cart } from "@prisma/client";
 import Image from "next/image";
 import CartButton from "@/components/CartButton";
-import { getData } from "@/lib/dbHelpers";
+import { getItemsWithProduct } from "@/lib/dbHelpers";
 import DeleteButton from "@/components/DeleteButton";
 import PreviewPage from "@/components/CheckoutButton";
 import { loadStripe } from "@stripe/stripe-js";
-
+import { getServerSession } from "next-auth";
+import options from "../api/auth/[...nextauth]/options";
 export default async function Cart() {
-  
+  const session = await getServerSession(options)
+  const cart = await getItemsWithProduct(session!.user!.id)
+  console.log(cart)
   const getUniqueItems = async (cart: Cart) => {
     const uniqueItems = await db.cartItem.findMany({
       where: {
@@ -37,7 +40,6 @@ const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
 );
 
-  const cart = await getData();
   const uniqueProducts = await getUniqueItems(cart);
   const subtotal = getSubtotal();
   return (

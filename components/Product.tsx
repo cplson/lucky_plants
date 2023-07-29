@@ -28,7 +28,7 @@ async function Product({ product }: { product: Product }) {
           {product.price}
         </p>
 
-        <CartButton product={product} session={session ? session : undefined} count={count as number}/>
+        <CartButton product={product}  count={count as number}/>
       </div>
     </div>
   );
