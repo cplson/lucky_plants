@@ -47,7 +47,6 @@ export const updateCart = (data: ItemInfo) => {
 }
 
 export const getItemFromCart = (userId: string, productId: string) => {
-    // console.log('productId in api call', productId)
     return fetcher({url: `http://localhost:3000/api/getItemsFromCart?userId=${userId}&productId=${productId}`, method: 'GET'})
 }
 

@@ -15,9 +15,7 @@ const QuantityButtonGroup: FC<ProductProps> = ({
   const item = useState(null)
   const [quantity, setQuantity] = useState(count);
   const router = useRouter();
-  console.log('count in QBG:', count)
  
-
   const increment = () => {
     if(typeof quantity == 'number'){
       setQuantity(quantity + 1);
@@ -35,7 +33,6 @@ const QuantityButtonGroup: FC<ProductProps> = ({
     quantity: number,
     closeModal: () => void
   ) {
-    console.log('quantity is:', quantity);
     const data = await fetch("http://localhost:3000/api/updateCart", {
       method: "POST",
       headers: {
@@ -56,7 +53,6 @@ const QuantityButtonGroup: FC<ProductProps> = ({
     }).catch(err => {
       console.log(err)
     })
-    console.log('data is:', data)
     closeModal();
   }
   return (

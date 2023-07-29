@@ -35,7 +35,7 @@ export type ProductProps = {
   session?: Session,
   id?: string,
   count: number,
-  text: string;
+  text?: string;
   className?: string;
   closeModal?: () => void;
 };

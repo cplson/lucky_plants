@@ -24,7 +24,6 @@ export async function GET(req: Request) {
     const quantity = user?.cart!.items.filter(
       (item) => item.productId == productId
     ).length;
-    console.log("quantity is:", quantity);
     return NextResponse.json(quantity);
   }
 
