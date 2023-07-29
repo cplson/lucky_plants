@@ -20,10 +20,11 @@ export async function GET(req: Request) {
   });
 
   if (user) {
+    
     const quantity = user?.cart!.items.filter(
-      (item) => item.id === productId
+      (item) => item.productId == productId
     ).length;
-    // console.log("quantity is:", quantity);
+    console.log("quantity is:", quantity);
     return NextResponse.json(quantity);
   }
 

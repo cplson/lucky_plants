@@ -1,12 +1,10 @@
 "use client";
 import { ProductProps } from "@/lib/types";
-import { FC, startTransition, useState } from "react";
+import { FC, startTransition, useEffect, useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
 import { Product } from "@prisma/client";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
 
 const QuantityButtonGroup: FC<ProductProps> = ({
   product,
@@ -17,8 +15,9 @@ const QuantityButtonGroup: FC<ProductProps> = ({
   const item = useState(null)
   const [quantity, setQuantity] = useState(count);
   const router = useRouter();
-  console.log('id in QBG:', id)
+  console.log('count in QBG:', count)
  
+
   const increment = () => {
     if(typeof quantity == 'number'){
       setQuantity(quantity + 1);

@@ -11,8 +11,7 @@ async function Product({ product }: { product: Product }) {
   // const itemCount = await getData(product.id);
   const session = await getServerSession(options)
   const count = await getData(session, product)
-  
-  // console.log('items in product:', count)
+  // console.log('count in product:', count)
   return (
     <div className="flex flex-col items-center gap-2 my-8">
       <h2 className="text-xl font-semibold text-stone-700 tracking-wide">
@@ -63,6 +62,8 @@ async function Product({ product }: { product: Product }) {
 const getData = async (session: Session | null, product: Product) => {
   if(session){
     // console.log('productlist:', session)
+  // console.log('product in product:', product.id)
+
     return await getItemFromCart(session!.user!.id, product.id)
   }
   return 0
