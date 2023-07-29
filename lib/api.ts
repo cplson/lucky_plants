@@ -54,8 +54,8 @@ export const authUser = () => {
     return fetcher({url: '/api/authUser', method: 'get'})
 }
 
-export const removeItems = (id: string) => {
-    return fetcher({url: '/api/deleteItems', method: 'post', body: id})
+export const removeItems = (productId: string, userId: string) => {
+    return fetcher({url: '/api/deleteItems', method: 'post', body: {productId, userId}})
 }
 
 // export const signout = (id: string) => {

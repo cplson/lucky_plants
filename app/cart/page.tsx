@@ -1,18 +1,15 @@
 import Card from "@/components/Card";
 import { db } from "@/lib/db";
 import { Cart } from "@prisma/client";
-import Image from "next/image";
-import CartButton from "@/components/CartButton";
 import { getItemsWithProduct } from "@/lib/dbHelpers";
-import DeleteButton from "@/components/DeleteButton";
 import PreviewPage from "@/components/CheckoutButton";
 import { loadStripe } from "@stripe/stripe-js";
 import { getServerSession } from "next-auth";
 import options from "../api/auth/[...nextauth]/options";
+import CartProduct from "./CartProduct";
 export default async function Cart() {
-  const session = await getServerSession(options)
-  const cart = await getItemsWithProduct(session!.user!.id)
-  console.log(cart)
+  const session = await getServerSession(options);
+  const cart = await getItemsWithProduct(session!.user!.id);
   const getUniqueItems = async (cart: Cart) => {
     const uniqueItems = await db.cartItem.findMany({
       where: {
@@ -28,69 +25,41 @@ export default async function Cart() {
 
   const getSubtotal = () => {
     let total = 0;
-    for(let item of cart.items){
+    for (let item of cart.items) {
       total += item.product.price;
     }
-    return total
-  }
-  
+    return total;
+  };
+
   // Make sure to call `loadStripe` outside of a component’s render to avoid
-// recreating the `Stripe` object on every render.
-const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
-);
+  // recreating the `Stripe` object on every render.
+  const stripePromise = loadStripe(
+    process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
+  );
 
   const uniqueProducts = await getUniqueItems(cart);
+  console.log('uniqueProducts:', uniqueProducts)
   const subtotal = getSubtotal();
   return (
     <div>
       <Card className="shadow-md max-w-3xl mx-auto">
         <div className="not-first:mt-8">
+          
           {uniqueProducts.map((product) => {
-            let count = 0;
-            for (let item of cart!.items) {
-              if (item.productId === product.product.id) {
-                count++;
-              }
-            }
-            return (
-              <>
-                <div className="flex justify-between">
-                  <div>
-                    <h1 className="text-xl font-semibold text-stone-700 tracking-wide mb-2">
-                      {product.product.name}
-                    </h1>
-                    <div className="relative w-48 h-48">
-                      <Image
-                        className="object-cover rounded-lg border-2 border-gray-700"
-                        src={product.product.url}
-                        fill
-                        alt={product.product.name}
-                      />
-                    </div>
-                  </div>
-                  <div className="flex flex-col justify-between items-end">
-                    <div className="flex flex-col items-end">
-                      <div className="text-2xl font-semibold">
-                        ${product.product.price}
-                      </div>
-                      <div className="text-lg">
-                        <span className="font-semibold">Qty:</span> {count}
-                      </div>
-                    </div>
-                    <div className="flex">
-                      <CartButton product={product.product} count={count} text={'Edit'} className={"mr-4"} />
-                      <DeleteButton product={product.product} cart={cart}/>
-                    </div>
-                  </div>
-                </div>
-                <hr />
-              </>
-            );
-          })}
+            const count = cart.items.filter(item => product.product.id === item.productId).length
+            console.log('count:', count)
+            console.log('product:', product.product)
+            console.log('userId:', session?.user.id)
+
+           return <CartProduct key={product.id} product={product.product} count={count} userId={session!.user!.id}/>
+          }
+            
+          )}
           <div className="md:flex justify-between items-start">
-            <div className="text-2xl m-4 md:w-1/2 md:m-0"><span className="font-semibold">Subtotal:</span> ${subtotal}</div>
-            <PreviewPage cart={cart}/>
+            <div className="text-2xl m-4 md:w-1/2 md:m-0">
+              <span className="font-semibold">Subtotal:</span> ${subtotal}
+            </div>
+            <PreviewPage cart={cart} />
             {/* <PreviewPage user={user}/> */}
           </div>
         </div>

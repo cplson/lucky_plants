@@ -1,19 +1,8 @@
 // dbHelpers.ts is used for helper functions related to db data
-import { User } from "@/lib/types";
-import { NextApiRequest } from "next";
-import { getUserFromCookie, validateJWT } from "@/lib/auth";
 import { db } from "./db";
 import { Product, CartItem, Cart } from "@prisma/client";
-import { cookies } from "next/headers";
 
-export const authenticateUser = async (req) => {
-  if (process.env.COOKIE_NAME) {
-    return await validateJWT(req.cookies[process.env.COOKIE_NAME]);
-  }
-  else{
-    return undefined;
-  }
-};
+
 
 export const getCart = async (id: string) => {
   return await db.cart.findUnique({
@@ -65,8 +54,6 @@ export async function deleteQuantity(
   cartId: string,
   items: CartItem[]
 ) {
-  // console.log("cartId is:", cartId);
-  // console.log("productId is:", product.id);
 
   // Feels kind of hacky but it gets the job done
   for (let i = 0; i < quantity; i++) {

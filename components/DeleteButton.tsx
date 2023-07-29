@@ -8,12 +8,12 @@ import { removeItems } from "@/lib/api";
 
 type DeleteBtnProps = {
  product: Product
- cart: Cart
+ userId: string
+ count?: number
 }
-const DeleteButton: FC<DeleteBtnProps> = ({product, cart}) =>{
+const DeleteButton: FC<DeleteBtnProps> = ({product, userId}) =>{
     const deleteItems = () => {
-        console.log(product)
-        removeItems(product.id)
+        removeItems(product.id, userId)
       }
     return (
         <Button size="small" onClick={deleteItems}>Delete</Button>
