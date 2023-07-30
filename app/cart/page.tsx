@@ -43,7 +43,7 @@ export default async function Cart() {
   return (
     <div>
       <Card className="shadow-md max-w-3xl mx-auto">
-        <div className="not-first:mt-8">
+        <div className="w-full not-first:mt-8">
           
           {uniqueProducts.map((product) => {
             const count = cart.items.filter(item => product.product.id === item.productId).length

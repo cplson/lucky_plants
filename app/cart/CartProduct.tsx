@@ -21,8 +21,8 @@ const CartItem: FC<CartItemProps> = ({ product, count, userId }) => {
     <>
       {thisCount > 0 && (
         <>
-          <div className="flex justify-between">
-            <div>
+          <div className="w-48 mx-auto md:w-full md:flex md:justify-between">
+            <div className="">
               <h1 className="text-xl font-semibold text-stone-700 tracking-wide mb-2">
                 {product.name}
               </h1>
@@ -35,19 +35,19 @@ const CartItem: FC<CartItemProps> = ({ product, count, userId }) => {
                 />
               </div>
             </div>
-            <div className="flex flex-col justify-between items-end">
-              <div className="flex flex-col items-end">
+            <div className="flex justify-between mt-4 md:flex-col md:justify-between md:items-end">
+              <div className="md:flex-col md:items-end">
                 <div className="text-2xl font-semibold">${product.price}</div>
                 <div className="text-lg">
                   <span className="font-semibold">Qty:</span> {count}
                 </div>
               </div>
-              <div className="flex">
+              <div className="flex flex-col items-end justify-between md:flex-row">
                 <CartButton
                   product={product}
                   count={count}
                   text={"Edit"}
-                  className={"mr-4"}
+                  className={"md:mr-4"}
                 />
                 <DeleteButton
                   product={product}
