@@ -1,10 +1,35 @@
-"use client";
 import { ShoppingCart } from "react-feather";
 import clsx from "clsx";
 import { Cart } from "@prisma/client";
+import { getServerSession } from "next-auth";
+import options from "@/app/api/auth/[...nextauth]/options";
+import { db } from "@/lib/db";
 
-export default function Cart({cartCount}: {cartCount: number}) {
-  
+export default async function Cart() {
+  const session = await getServerSession(options);
+  console.log("session in layout:", session);
+  const id = session?.user?.id;
+  console.log("id in layout is:", id);
+  const getData = async () => {
+    if (session) {
+      const cart = await db.cart.findUnique({
+        where: {
+          shopperId: id,
+        },
+        include: {
+          items: {
+            include: {
+              product: true,
+            },
+          },
+        },
+      });
+      return cart!.items.length;
+    }
+    return 0;
+  };
+  const cartCount = await getData();
+
   return (
     <div
       className={clsx(
