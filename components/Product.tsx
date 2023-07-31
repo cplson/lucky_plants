@@ -4,11 +4,11 @@ import CartButton from "./CartButton";
 import { Session, getServerSession } from "next-auth";
 import options from "@/app/api/auth/[...nextauth]/options";
 import { getItemFromCart } from "@/lib/api";
+import { db } from "@/lib/db";
 
 
 async function Product({ product }: { product: Product }) {
-  const session = await getServerSession(options)
-  const count = await getData(session, product)
+  const count = await getData(product)
   return (
     <div className="flex flex-col items-center gap-2 my-8">
       <h2 className="text-xl font-semibold text-stone-700 tracking-wide">
@@ -34,9 +34,19 @@ async function Product({ product }: { product: Product }) {
   );
 }
 
-const getData = async (session: Session | null, product: Product) => {
+const getData = async (product: Product) => {
+  const session = await getServerSession(options)
+
   if(session){
-    return await getItemFromCart(session!.user!.id, product.id)
+    const cart = await db.cart.findUnique({
+      where:{
+        shopperId: session!.user!.id
+      },
+      include:{
+        items: true
+      }
+    })
+    return cart!.items.filter(item => item.productId == product.id).length
   }
   return 0
 }

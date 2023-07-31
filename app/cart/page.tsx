@@ -7,9 +7,11 @@ import { loadStripe } from "@stripe/stripe-js";
 import { getServerSession } from "next-auth";
 import options from "../api/auth/[...nextauth]/options";
 import CartProduct from "./CartProduct";
+
 export default async function Cart() {
   const session = await getServerSession(options);
   const cart = await getItemsWithProduct(session!.user!.id);
+
   const getUniqueItems = async (cart: Cart) => {
     const uniqueItems = await db.cartItem.findMany({
       where: {

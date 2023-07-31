@@ -7,9 +7,7 @@ import { db } from "@/lib/db";
 
 export default async function Cart() {
   const session = await getServerSession(options);
-  console.log("session in layout:", session);
   const id = session?.user?.id;
-  console.log("id in layout is:", id);
   const getData = async () => {
     if (session) {
       const cart = await db.cart.findUnique({

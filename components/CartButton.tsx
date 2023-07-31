@@ -13,7 +13,7 @@ Modal.setAppElement("#root");
 const CartButton: FC<ProductProps> = ({ product, count, className }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const {data: session} = useSession()
-  console.log('session in cartButton:', session)
+  // console.log('session in cartButton:', session)
   const router = useRouter()
   const customStyles = {
     content: {
