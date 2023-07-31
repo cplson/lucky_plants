@@ -5,9 +5,9 @@ import Cart from "./Cart";
 
 const links: LinkType[] = [
   { text: "Shop", path: "/shop" },
-  { text: "Our Story", path: "/about" },
-  { text: "Journal", path: "/journal" },
-  { text: "Contact", path: "/contact" },
+  { text: "Our Story", path: "" },
+  { text: "Journal", path: "" },
+  { text: "Contact", path: "" },
 ];
 
 export default function NavBar({ isMobile, turnInactive }: { isMobile: boolean, turnInactive: () => void }) {
@@ -16,7 +16,7 @@ export default function NavBar({ isMobile, turnInactive }: { isMobile: boolean, 
       <ul className="flex flex-col items-start  lg:flex-row lg:items-center">
         {links.map((link) => {
           return (
-            <li key={link.path} className={"text-lg my-1 mx-0"} onClick={turnInactive}>
+            <li key={link.path} className={"my-1 mx-0"} onClick={turnInactive}>
               <NavLink link={link} />
             </li>
           );

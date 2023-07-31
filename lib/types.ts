@@ -8,7 +8,7 @@ import { Cart as CartModel, Product } from "@prisma/client";
 import { Session } from "next-auth";
 
 export type Link = {
-  path: string;
+  path?: string;
   text: string;
 };
 

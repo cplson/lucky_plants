@@ -17,7 +17,7 @@ export default function DropdownMenu() {
   }
   return (
     <>
-      <div className="relative" onMouseLeave={turnInactive}>
+      <div className="relative z-30" onMouseLeave={turnInactive}>
         <button className={clsx("mr-12 border-2 border-black/0", isActive && ' border-black/100 rounded-lg')} onMouseOver={turnActive} >
           {isActive ? (
             <X width={"40"} height={"40"}/>
@@ -26,7 +26,7 @@ export default function DropdownMenu() {
           )}
         </button>
         {isActive && (
-          <div className="absolute bg-white p-4 z-10 rounded border-2 border-gray-400 shadow-xl">
+          <div className="absolute bg-white p-4 rounded border-2 border-gray-400 shadow-xl">
             <NavBar isMobile={true} turnInactive={turnInactive} />
           </div>
         )}
