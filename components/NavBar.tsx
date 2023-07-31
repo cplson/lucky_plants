@@ -10,13 +10,13 @@ const links: LinkType[] = [
   { text: "Contact", path: "/contact" },
 ];
 
-export default function NavBar({ isMobile }: { isMobile: boolean }) {
+export default function NavBar({ isMobile, turnInactive }: { isMobile: boolean, turnInactive: () => void }) {
   return (
     <>
       <ul className="flex flex-col items-start  lg:flex-row lg:items-center">
         {links.map((link) => {
           return (
-            <li key={link.path} className={"text-lg my-1 mx-0"}>
+            <li key={link.path} className={"text-lg my-1 mx-0"} onClick={turnInactive}>
               <NavLink link={link} />
             </li>
           );
@@ -26,7 +26,7 @@ export default function NavBar({ isMobile }: { isMobile: boolean }) {
             <hr className="w-full my-2" />
             
             <li className={"text-lg text-gray-600 hover:text-green-700"}>
-              <SignIOBtn />
+              <SignIOBtn turnInactive={turnInactive}/>
             </li>
           </>
         )}

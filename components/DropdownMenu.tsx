@@ -27,7 +27,7 @@ export default function DropdownMenu() {
         </button>
         {isActive && (
           <div className="absolute bg-white p-4 z-10 rounded border-2 border-gray-400 shadow-xl">
-            <NavBar isMobile={true} />
+            <NavBar isMobile={true} turnInactive={turnInactive} />
           </div>
         )}
       </div>
