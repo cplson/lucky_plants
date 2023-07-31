@@ -39,11 +39,11 @@ export default async function RootLayout({
       id="root"
       className={`${cormorant.variable} ${inter.variable}`}
     >
-      <body className="flex-column justify-center p-4 sm:w-4/5 font-sans bg-gradient-to-r from-lime-100 to-green-100  max-w-7xl mx-auto">
+      <body className="flex-column justify-center p-4 font-sans bg-gradient-to-r from-lime-100 to-green-100 ">
         {/* <QueryClientProvider client={queryClient}> */}
         <AuthProviders>
           {/* TOP MENU */}
-          <div className="relative">
+          <div className="relative sm:w-4/5 mx-auto max-w-7xl">
             <div className="flex justify-between items-center invisible lg:visible absolute w-full">
               <Link href="/home" className="">
                 <h1 className="font-serif text-4xl font-semibold text-green-900">
@@ -75,7 +75,7 @@ export default async function RootLayout({
             </div>
           </div>
           <div className="mt-20 w-full">{children}</div>
-          <footer className="">
+          <footer className="absolute bottom-4 mx-auto left-0 right-0">
             <Socials />
           </footer>
         </AuthProviders>
