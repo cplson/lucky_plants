@@ -8,14 +8,17 @@ import clsx from "clsx";
 export default function DropdownMenu() {
   const [isActive, setIsActive] = useState(false);
 
-  const toggleActive = () => {
-    setIsActive(!isActive);
+  const turnActive = () => {
+    setIsActive(true);
   };
 
+  const turnInactive = () => {
+    setIsActive(false)
+  }
   return (
     <>
-      <div className="relative">
-        <button className={clsx("mr-12 border-2 border-black/0", isActive && ' border-black/100 rounded-lg')} onClick={toggleActive}>
+      <div className="relative" onMouseLeave={turnInactive}>
+        <button className={clsx("mr-12 border-2 border-black/0", isActive && ' border-black/100 rounded-lg')} onMouseOver={turnActive} >
           {isActive ? (
             <X width={"40"} height={"40"}/>
           ) : (
