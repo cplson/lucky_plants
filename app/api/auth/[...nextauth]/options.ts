@@ -7,11 +7,15 @@ import { comparePasswords, hashPassword } from "@/lib/auth";
 import { v4 } from "uuid";
 
 const options: NextAuthOptions = {
+  // adapter throws error
   // adapter: PrismaAdapter(db),
   session: {
     strategy: 'jwt',
     maxAge: 30 * 24 * 60 * 60,
     updateAge: 24 * 60 * 60,
+  },
+  pages:{
+    signIn: '/signin'
   },
   callbacks: {
     async jwt({ token, user }) {
@@ -96,7 +100,7 @@ const options: NextAuthOptions = {
           // console.log('user', user);
           const isUser = await comparePasswords(
             credentials!.password,
-            user!.password
+            user!.password!
           );
           
           if (isUser) {
