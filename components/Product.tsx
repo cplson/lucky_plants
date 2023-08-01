@@ -23,7 +23,7 @@ async function Product({ product }: { product: Product }) {
         />
       </div>
       <div className="flex justify-between items-center w-full">
-        <p className="text-2xl font-medium text-stone-500">
+        <p className="ml-1 text-2xl font-medium text-stone-500">
           <span className="mr-1">$</span>
           {product.price}
         </p>
