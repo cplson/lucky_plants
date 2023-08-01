@@ -4,12 +4,11 @@ import Button from "@/components/Button";
 import Card from "./Card";
 import Input from "./Input";
 import { useRouter } from "next/navigation";
-import { register } from '@/lib/api';
+import { register } from "@/lib/api";
 import { useCallback, useState } from "react";
 import Link from "next/link";
-import {signIn} from "next-auth/react"
+import { signIn } from "next-auth/react";
 import GithubAuthBtn from "./GithubAuthBtn";
-
 
 // Content for register page
 const registerContent = {
@@ -37,7 +36,7 @@ const initial = { email: "", password: "", firstName: "", lastName: "" };
 export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
   const [formState, setFormState] = useState({ ...initial });
   const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const handleSubmit = useCallback(
@@ -48,9 +47,12 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
         if (mode === "register") {
           await register(formState);
         } else {
-          const user = await signIn('credentials', {email: formState.email, password: formState.password, callbackUrl: 'http://localhost:3000/shop'});
+          const user = await signIn("credentials", {
+            email: formState.email,
+            password: formState.password,
+            callbackUrl: "http://localhost:3000/shop",
+          });
         }
-        
       } catch (e) {
         setError(`Could not ${mode}`);
       } finally {
@@ -64,20 +66,26 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
       formState.lastName,
     ]
   );
-  
-  const content = mode === 'register' ? registerContent : signinContent;
 
-  return(
-    <Card className='max-w-2xl mx-8 mt-0 md:mx-auto'>
-      <div className="w-full">
+  const content = mode === "register" ? registerContent : signinContent;
+
+  return (
+    <Card className="max-w-2xl mx-8 mt-0 md:mx-auto">
+      <div className="w-full flex flex-col">
         <div className="text-center">
           <h2 className="text-2xl mb-2">{content.header}</h2>
-          <p className="tex-lg text-black/40">{content.subheader}</p>
         </div>
         <GithubAuthBtn />
-        <form onSubmit={handleSubmit} className="pb-10 pt-6 w-full">
+        <div className="mt-4 flex items-center justify-center">
+          <hr className="w-1/4" />
+          <p className="text-lg text-gray-600 mx-4">or</p>
+          <hr className="w-1/4" />
+        </div>
+        <p className="text-md text-black/40 mx-auto mt-2">{content.subheader}</p>
+
+        <form onSubmit={handleSubmit} className="pb-10 pt-4 w-full">
           {mode === "register" && (
-            <div className="flex flex-col md:flex-row mb-8 justify-between">
+            <div className="flex flex-col md:flex-row mb-4 justify-between">
               <div className="pr-2">
                 <div className="text-lg mb-1 ml-2 text-black/50">
                   First Name
@@ -132,8 +140,7 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
               }
             />
           </div>
-          <hr className="w-1/2 mx-auto"/>
-          
+
           <div className="flex items-center justify-between mt-8">
             <div>
               <span>
@@ -155,5 +162,5 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
         </form>
       </div>
     </Card>
-  )
+  );
 }
