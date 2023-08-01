@@ -16,7 +16,7 @@ export default function NavBar({ isMobile, turnInactive }: { isMobile: boolean, 
       <ul className="flex flex-col items-start  lg:flex-row lg:items-center">
         {links.map((link) => {
           return (
-            <li key={link.path} className={"my-1 mx-0"} onClick={turnInactive}>
+            <li key={link.text} className={"my-1 mx-0"} onClick={turnInactive}>
               <NavLink link={link} />
             </li>
           );

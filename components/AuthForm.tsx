@@ -67,7 +67,7 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
   const content = mode === 'register' ? registerContent : signinContent;
 
   return(
-    <Card className='max-w-2xl mt-0 mx-auto'>
+    <Card className='max-w-2xl mx-8 mt-0 md:mx-auto'>
       <div className="w-full">
         <div className="text-center">
           <h2 className="text-2xl mb-2">{content.header}</h2>

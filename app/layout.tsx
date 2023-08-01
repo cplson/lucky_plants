@@ -64,7 +64,7 @@ export default async function RootLayout({
             </div>
             <div className="flex justify-between items-center lg:invisible absolute w-full">
               <DropdownMenu />
-              <Link href="/home" className="">
+              <Link href="/" className="">
                 <h1 className="font-serif text-4xl font-semibold text-green-900">
                   Lucky
                 </h1>
