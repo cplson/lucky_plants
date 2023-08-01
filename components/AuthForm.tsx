@@ -157,7 +157,6 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
               <button className="text-xl font-medium px-4 py-2 rounded-3xl text-blue-700 border-2 border-blue-700 hover:border-blue-500 focus:border-blue-500 hover:text-blue-500 focus:text-blue-500">
                 {content.buttonText}
               </button>
-              {/* <button onClick={() => signIn()}>Sign in</button> */}
             </div>
           </div>
         </form>
