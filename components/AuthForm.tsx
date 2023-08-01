@@ -1,6 +1,5 @@
 "use client";
 
-import Button from "@/components/Button";
 import Card from "./Card";
 import Input from "./Input";
 import { useRouter } from "next/navigation";
@@ -9,6 +8,7 @@ import { useCallback, useState } from "react";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import GithubAuthBtn from "./GithubAuthBtn";
+import GoogleAuthBtn from "./GoogleAuthBtn";
 
 // Content for register page
 const registerContent = {
@@ -75,6 +75,7 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
         <div className="text-center">
           <h2 className="text-2xl mb-2">{content.header}</h2>
         </div>
+        <GoogleAuthBtn />
         <GithubAuthBtn />
         <div className="mt-4 flex items-center justify-center">
           <hr className="w-1/4" />
