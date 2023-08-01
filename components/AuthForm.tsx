@@ -50,7 +50,7 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
           const user = await signIn("credentials", {
             email: formState.email,
             password: formState.password,
-            callbackUrl: "http://localhost:3000/shop",
+            callbackUrl: "https://lucky-plants-cplson.vercel.app/shop",
           });
         }
       } catch (e) {
