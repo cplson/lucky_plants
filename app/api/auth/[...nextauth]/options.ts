@@ -22,7 +22,7 @@ const options: NextAuthOptions = {
             email: token.email!
           }
         })
-
+        console.log('thisUser:', thisUser)
         // if Oauth user is not in the db
         // create user and cart for this user
         // then return the db user id
@@ -43,7 +43,7 @@ const options: NextAuthOptions = {
               shopperId: dbUser.id
             }
           })
-
+          return { email: dbUser!.email, id: dbUser!.id, ...token };
         }
         
         return { email: thisUser!.email, id: thisUser!.id, ...token };
