@@ -67,31 +67,31 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
   const content = mode === 'register' ? registerContent : signinContent;
 
   return(
-    <Card className='max-w-2xl mx-auto'>
+    <Card className='max-w-2xl mt-0 mx-auto'>
       <div className="w-full">
         <div className="text-center">
-          <h2 className="text-3xl mb-2">{content.header}</h2>
+          <h2 className="text-2xl mb-2">{content.header}</h2>
           <p className="tex-lg text-black/40">{content.subheader}</p>
         </div>
-        <form onSubmit={handleSubmit} className="py-10 w-full">
+        <form onSubmit={handleSubmit} className="pb-10 pt-6 w-full">
           {mode === "register" && (
-            <div className="flex mb-8 justify-between">
+            <div className="flex flex-col md:flex-row mb-8 justify-between">
               <div className="pr-2">
-                <div className="text-lg mb-4 ml-2 text-black/50">
+                <div className="text-lg mb-1 ml-2 text-black/50">
                   First Name
                 </div>
                 <Input
                   required
                   placeholder="First Name"
                   value={formState.firstName}
-                  className="border-solid border-gray border-2 px-6 py-2 text-lg rounded-xl w-full"
+                  className=" mb-4 border-solid border-gray border-2 px-6 py-2 text-lg rounded-xl w-full"
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     setFormState((s) => ({ ...s, firstName: e.target.value }))
                   }
                 />
               </div>
-              <div className="pl-2">
-                <div className="text-lg mb-4 ml-2 text-black/50">Last Name</div>
+              <div className="">
+                <div className="text-lg mb-1 ml-2 text-black/50">Last Name</div>
                 <Input
                   required
                   placeholder="Last Name"
@@ -104,8 +104,8 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
               </div>
             </div>
           )}
-          <div className="mb-8">
-            <div className="text-lg mb-4 ml-2 text-black/50">Email</div>
+          <div className="mb-4">
+            <div className="text-lg mb-1 ml-2 text-black/50">Email</div>
             <Input
               required
               type="email"
@@ -118,7 +118,7 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
             />
           </div>
           <div className="mb-8">
-            <div className="text-lg mb-4 ml-2 text-black/50">Password</div>
+            <div className="text-lg mb-1 ml-2 text-black/50">Password</div>
             <Input
               required
               value={formState.password}
@@ -130,7 +130,8 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
               }
             />
           </div>
-          <div className="flex items-center justify-between">
+          <hr className="w-1/2 mx-auto"/>
+          <div className="flex items-center justify-between mt-8">
             <div>
               <span>
                 <Link
@@ -142,9 +143,9 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
               </span>
             </div>
             <div>
-              <Button intent="tertiary">
+              <button className="text-xl font-medium px-4 py-2 rounded-3xl text-blue-700 border-2 border-blue-700 hover:border-blue-500 focus:border-blue-500 hover:text-blue-500 focus:text-blue-500">
                 {content.buttonText}
-              </Button>
+              </button>
               {/* <button onClick={() => signIn()}>Sign in</button> */}
             </div>
           </div>
