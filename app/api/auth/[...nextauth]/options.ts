@@ -4,9 +4,10 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { db } from "@/lib/db";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { comparePasswords, hashPassword } from "@/lib/auth";
+import { v4 } from "uuid";
 
 const options: NextAuthOptions = {
-  adapter: PrismaAdapter(db),
+  // adapter: PrismaAdapter(db),
   session: {
     strategy: 'jwt',
     maxAge: 30 * 24 * 60 * 60,
@@ -14,17 +15,38 @@ const options: NextAuthOptions = {
   },
   callbacks: {
     async jwt({ token, user }) {
+        console.log('triggered jwt callback', user, 'token:', token)
         
-        
-        const thisUser = await db.user.findUnique({
+        const thisUser = await db.user.findFirst({
           where:{
-            id: token.sub
+            email: token.email!
           }
         })
-        // console.log('thisUser in token:', thisUser)
-        // console.log('token in token:', token)
-        token.name = thisUser?.firstName
-        return { ...token, id: thisUser!.id };
+
+        // if Oauth user is not in the db
+        // create user and cart for this user
+        // then return the db user id
+        if(!thisUser && user.email){
+          
+          const dbUser = await db.user.create({
+            data:{
+              email: user.email
+            },
+            select: {
+              id: true,
+              email: true,
+            }
+          })
+          token.id = dbUser.id
+          await db.cart.create({
+            data:{
+              shopperId: dbUser.id
+            }
+          })
+
+        }
+        
+        return { email: thisUser!.email, id: thisUser!.id, ...token };
     },
     async session({ session, token, user }) {
         // Send properties to the client, like an access_token from a provider.
@@ -33,10 +55,9 @@ const options: NextAuthOptions = {
         // console.log('session in session:', session)
         return session;
     },
+   
 },
-  pages:{
-    signIn: "/signin"
-  },
+  
   providers: [
     GitHubProvider({
       clientId: process.env.GITHUB_ID as string,
@@ -57,7 +78,7 @@ const options: NextAuthOptions = {
       },
       async authorize(credentials) {
         // retrieve credentials here
-        // console.log("inside auth", credentials);
+        console.log("inside auth", credentials);
         const hashedPassword = await hashPassword(credentials!.password);
 
         try {
@@ -79,7 +100,7 @@ const options: NextAuthOptions = {
           );
           
           if (isUser) {
-            return { id: user.id};
+            return { id: user.id, email: user.email};
           }
          
         } catch (e) {

@@ -8,6 +8,7 @@ import { register } from '@/lib/api';
 import { useCallback, useState } from "react";
 import Link from "next/link";
 import {signIn} from "next-auth/react"
+import GithubAuthBtn from "./GithubAuthBtn";
 
 
 // Content for register page
@@ -73,6 +74,7 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
           <h2 className="text-2xl mb-2">{content.header}</h2>
           <p className="tex-lg text-black/40">{content.subheader}</p>
         </div>
+        <GithubAuthBtn />
         <form onSubmit={handleSubmit} className="pb-10 pt-6 w-full">
           {mode === "register" && (
             <div className="flex flex-col md:flex-row mb-8 justify-between">
@@ -131,6 +133,7 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
             />
           </div>
           <hr className="w-1/2 mx-auto"/>
+          
           <div className="flex items-center justify-between mt-8">
             <div>
               <span>
