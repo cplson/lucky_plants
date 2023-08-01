@@ -75,8 +75,8 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
         <div className="text-center">
           <h2 className="text-2xl mb-2">{content.header}</h2>
         </div>
-        <GoogleAuthBtn />
         <GithubAuthBtn />
+        <GoogleAuthBtn />
         <div className="mt-4 flex items-center justify-center">
           <hr className="w-1/4" />
           <p className="text-lg text-gray-600 mx-4">or</p>
