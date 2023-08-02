@@ -25,9 +25,9 @@ export default async function Home() {
           <span>Shop Now</span>
         </Link>
       </div>
-      <div className="lg:mt-0 border-black">
+      <div className="lg:mt-0 border-black border-2">
         <Image
-          className={"w-full h-full object-cover overflow-hidden"}
+          className={"w-full h-full object-cover overflow-hidden border-red-600 border-2"}
           width={1000}
           height={751}
           src={"/assets/landing_plant.png"}
