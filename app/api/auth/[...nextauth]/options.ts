@@ -30,11 +30,11 @@ const options: NextAuthOptions = {
         // if Oauth user is not in the db
         // create user and cart for this user
         // then return the db user id
-        if(!thisUser && user.email){
+        if(!thisUser){
           
           const dbUser = await db.user.create({
             data:{
-              email: user.email
+              email: token.email
             },
             select: {
               id: true,

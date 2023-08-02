@@ -10,7 +10,7 @@ export default function GithubAuthBtn() {
       <input
         type="hidden"
         name="callbackUrl"
-        value="https://lucky-plants-cplson.vercel.app"
+        value="https://lucky-plants-cplson.vercel.app/"
       />
       <button
         type="submit"
@@ -37,3 +37,5 @@ export default function GithubAuthBtn() {
     </form>
   );
 }
+
+// csrf token c67b56ed88ddc61609eb112f5fa48d82defdf7636d18de04613d9c3f26249ca4
