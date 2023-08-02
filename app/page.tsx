@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default async function Home() {
   return (
-    <div className="bg-white rounded max-w-sm px-2 flex flex-col z-20 lg:mt-24 lg:flex-row sm:w-4/5 mx-auto sm:max-w-md lg:max-w-4xl">
+    <div className="bg-white rounded max-w-sm px-2 flex flex-col z-20 lg:pr-0 lg:mt-24 lg:flex-row sm:w-4/5 mx-auto sm:max-w-md lg:max-w-4xl">
       {/* <button className='hover:cursor-pointer hover:border-slate-800 border-2 my-4'>Shop Now</button> */}
       <div className="border-red-600 p-4 sm:pt-8 sm:px-8 lg:max-w-sm lg:my-16 lg:pr-0">
         <h1 className="font-bold text-3xl sm:text-5xl leading-tight ">
