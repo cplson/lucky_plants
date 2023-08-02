@@ -45,7 +45,12 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
 
       try {
         if (mode === "register") {
-          await register(formState);
+          await register(formState)
+          await signIn("credentials", {
+            email: formState.email,
+            password: formState.password,
+            callbackUrl: "https://lucky-plants-cplson.vercel.app/shop",
+          });
         } else {
           const user = await signIn("credentials", {
             email: formState.email,

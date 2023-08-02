@@ -29,11 +29,6 @@ export default async function register(
     );
     console.log('jwt', jwt)
     await createUsersCart(user.id);
-    await signIn('credentials', {
-      email: req.body.email,
-      password: req.body.password,
-      callbackUrl: "https://lucky-plants-cplson.vercel.app/shop",
-    })
     res.status(201);
     res.json({});
   } else {
