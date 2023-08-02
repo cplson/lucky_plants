@@ -1,5 +1,5 @@
 export default function GithubAuthBtn() {
- 
+  console.log('in githubauthbtn', process.env.DOMAIN)
   return (
     <form action={`${process.env.DOMAIN}/api/auth/signin/github`} method="POST" className="flex justify-center w-full mt-8">
       <input

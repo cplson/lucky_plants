@@ -1,7 +1,8 @@
 'use client'
 
 const clearUsers = async () => {
-    await fetch(`${process.env.DOMAIN}/api/clearUsers`, {
+    console.log('triggered clearUsers()', process.env.DOMAIN)
+    await fetch(`http://localhost:3000/api/clearUsers`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
