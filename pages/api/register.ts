@@ -2,7 +2,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { db } from "@/lib/db";
 import { createJWT, hashPassword } from "../../lib/auth";
 import { serialize } from "cookie";
-import { signIn } from "next-auth/react";
 
 export default async function register(
   req: NextApiRequest,

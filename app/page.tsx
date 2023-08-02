@@ -25,7 +25,7 @@ export default async function Home() {
           <span>Shop Now</span>
         </Link>
       </div>
-      <div className="lg:mt-0 lg:min-width-md border-black">
+      <div className="lg:mt-0 border-black">
         <Image
           className={"w-full h-full object-cover"}
           width={1000}
