@@ -3,7 +3,7 @@
 export default function GithubAuthBtn() {
  
   return (
-    <form action="https://lucky-plants-cplson.vercel.app/shop" method="POST" className="flex justify-center w-full mt-8">
+    <form action="https://lucky-plants-cplson.vercel.app/api/auth/signin/github" method="POST" className="flex justify-center w-full mt-8">
       <input
         type="hidden"
         name="csrfToken"
