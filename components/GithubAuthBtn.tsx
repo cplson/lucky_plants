@@ -11,6 +11,7 @@ export default function GithubAuthBtn() {
     // <form className="flex justify-center w-full mt-8">
       <button
         onClick={githubSignin}
+        type="submit"
         className="px-6 py-4 border-2 border-gray-300 rounded-lg"
       >
         <div className="flex">

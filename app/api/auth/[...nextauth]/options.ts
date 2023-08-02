@@ -14,9 +14,9 @@ const options: NextAuthOptions = {
     maxAge: 30 * 24 * 60 * 60,
     updateAge: 24 * 60 * 60,
   },
-  pages:{
-    signIn: '/signin'
-  },
+  // pages:{
+  //   signIn: '/signin'
+  // },
   callbacks: {
     async jwt({ token, user }) {
         console.log('triggered jwt callback', user, 'token:', token)
