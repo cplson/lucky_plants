@@ -16,7 +16,7 @@ export default async function register(
         lastName: req.body.lastName,
       },
     });
-
+    console.log('user:', user)
     const jwt = await createJWT(user);
     res.setHeader(
       "Set-Cookie",
@@ -26,7 +26,8 @@ export default async function register(
         maxAge: 60 * 60 * 24 * 7,
       })
     );
-    createUsersCart(user.id);
+    console.log('jwt', jwt)
+    await createUsersCart(user.id);
     res.status(201);
     res.json({});
   } else {
