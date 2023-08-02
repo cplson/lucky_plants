@@ -50,13 +50,13 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
           await signIn("credentials", {
             email: formState.email,
             password: formState.password,
-            callbackUrl: `${process.env.DOMAIN}/shop`,
+            callbackUrl: `http://localhost:3000/shop`,
           });
         } else {
           const user = await signIn("credentials", {
             email: formState.email,
             password: formState.password,
-            callbackUrl: `${process.env.DOMAIN}/shop`,
+            callbackUrl: `http://localhost:3000/shop`,
           });
         }
       } catch (e) {

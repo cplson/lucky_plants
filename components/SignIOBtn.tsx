@@ -14,7 +14,7 @@ export default function SignoutBtn({turnInactive}: {turnInactive: () => void}){
             {
                 session ?
                 <button className="lg:border-2 lg:border-black lg:rounded-2xl lg:px-3 lg:py-1  lg:hover:text-white lg:hover:bg-black" onClick={() => {signOut(); turnInactive()}}>Sign Out</button> :
-                <Link href='/signin'><button className="lg:border-2 lg:border-black lg:rounded-2xl lg:px-3 lg:py-1  lg:hover:text-white lg:hover:bg-black" onClick={() => {signIn(); turnInactive()}}>Sign In</button></Link> 
+                <Link href='/signin'><button className="lg:border-2 lg:border-black lg:rounded-2xl lg:px-3 lg:py-1  lg:hover:text-white lg:hover:bg-black" onClick={() => {signIn(); if(turnInactive) turnInactive()}}>Sign In</button></Link> 
             }
         </div>
     )
