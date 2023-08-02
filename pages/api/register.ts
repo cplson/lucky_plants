@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { db } from "@/lib/db";
 import { createJWT, hashPassword } from "../../lib/auth";
 import { serialize } from "cookie";
+import { signIn } from "next-auth/react";
 
 export default async function register(
   req: NextApiRequest,
@@ -28,6 +29,11 @@ export default async function register(
     );
     console.log('jwt', jwt)
     await createUsersCart(user.id);
+    await signIn('credentials', {
+      email: req.body.email,
+      password: req.body.password,
+      callbackUrl: "https://lucky-plants-cplson.vercel.app/shop",
+    })
     res.status(201);
     res.json({});
   } else {
