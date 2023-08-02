@@ -1,7 +1,7 @@
 export default function GithubAuthBtn() {
  
   return (
-    <form action="https://lucky-plants-cplson.vercel.app/api/auth/signin/github" method="POST" className="flex justify-center w-full mt-8">
+    <form action={`${process.env.DOMAIN}/api/auth/signin/github`} method="POST" className="flex justify-center w-full mt-8">
       <input
         type="hidden"
         name="csrfToken"
@@ -10,7 +10,7 @@ export default function GithubAuthBtn() {
       <input
         type="hidden"
         name="callbackUrl"
-        value="https://lucky-plants-cplson.vercel.app/"
+        value={`${process.env.DOMAIN}`}
       />
       <button
         type="submit"

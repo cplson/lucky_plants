@@ -35,7 +35,7 @@ const QuantityButtonGroup: FC<ProductProps> = ({
   ) {
     closeModal();
 
-    const data = await fetch("https://lucky-plants-cplson.vercel.app/api/updateCart", {
+    const data = await fetch(`${process.env.DOMAIN}/api/updateCart`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

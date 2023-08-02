@@ -47,7 +47,7 @@ export const updateCart = (data: ItemInfo) => {
 }
 
 export const getItemFromCart = (userId: string, productId: string) => {
-    return fetcher({url: `https://lucky-plants-cplson.vercel.app/api/getItemsFromCart?userId=${userId}&productId=${productId}`, method: 'GET'})
+    return fetcher({url: `${process.env.DOMAIN}/api/getItemsFromCart?userId=${userId}&productId=${productId}`, method: 'GET'})
 }
 
 export const authUser = () => {
