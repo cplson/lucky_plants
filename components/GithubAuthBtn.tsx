@@ -1,5 +1,3 @@
-
-
 export default function GithubAuthBtn() {
  
   return (
@@ -12,7 +10,7 @@ export default function GithubAuthBtn() {
       <input
         type="hidden"
         name="callbackUrl"
-        value="https://lucky-plants-cplson.vercel.app/shop"
+        value="https://lucky-plants-cplson.vercel.app"
       />
       <button
         type="submit"
