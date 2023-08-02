@@ -27,7 +27,7 @@ export default async function Home() {
       </div>
       <div className="lg:mt-0 border-black">
         <Image
-          className={"w-full h-full object-cover"}
+          className={"w-full h-full object-cover overflow-hidden"}
           width={1000}
           height={751}
           src={"/assets/landing_plant.png"}
