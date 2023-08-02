@@ -1,9 +1,12 @@
 'use client'
 
-import { db } from "@/lib/db"
-
 const clearUsers = async () => {
-    await db.user.deleteMany()
+    await fetch(`${process.env.DOMAIN}/api/clearUsers`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
 }
 
 export default function ClearUsersBtn(){
