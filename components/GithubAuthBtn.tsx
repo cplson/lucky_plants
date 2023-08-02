@@ -3,7 +3,7 @@ import { signIn } from "next-auth/react";
 
 const githubSignin = () => {
   console.log('triggered githubSignin')
-  signIn('github', {callbackUrl: 'http://localhost:3000'});
+  signIn('github', {callbackUrl: 'https://lucky-plants-cplson.vercel.app'});
 }
 
 export default function GithubAuthBtn() {

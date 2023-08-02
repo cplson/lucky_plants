@@ -8,7 +8,7 @@ import { comparePasswords, hashPassword } from "@/lib/auth";
 
 const options: NextAuthOptions = {
   // adapter throws error
-  adapter: PrismaAdapter(db),
+  // adapter: PrismaAdapter(db),
   session: {
     strategy: 'jwt',
     maxAge: 30 * 24 * 60 * 60,
@@ -51,13 +51,6 @@ const options: NextAuthOptions = {
         }
         
         return { email: thisUser!.email, id: thisUser!.id, ...token };
-    },
-    async redirect({ url, baseUrl }) {
-      // Allows relative callback URLs
-      if (url.startsWith("/")) return `${baseUrl}${url}`
-      // Allows callback URLs on the same origin
-      else if (new URL(url).origin === baseUrl) return url
-      return 'http://localhost:3000'
     },
     async session({ session, token, user }) {
         // Send properties to the client, like an access_token from a provider.

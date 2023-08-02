@@ -3,7 +3,7 @@ import { signIn } from "next-auth/react";
 
 const googleSignin = () => {
   console.log("triggered googleSignin");
-  signIn("google", { callbackUrl: "http://localhost:3000" });
+  signIn("google", { callbackUrl: "https://lucky-plants-cplson.vercel.app" });
 };
 
 export default function GoogleAuthBtn() {

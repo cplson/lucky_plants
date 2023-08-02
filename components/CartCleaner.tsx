@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 
 const clean = async (id: string) => {
     
-    await fetch(`${process.env.DOMAIN}/api/clearCart?userId=${id}`, {
+    await fetch(`https://lucky-plants-cplson.vercel.app/api/clearCart?userId=${id}`, {
         method: 'DELETE',
         headers: {
             "Content-Type": "application/json"
