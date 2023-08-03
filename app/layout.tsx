@@ -77,9 +77,15 @@ export default async function RootLayout({
                   Lucky
                 </h1>
               </Link>
-              <Link href="/cart" className="">
-                <Cart />
-              </Link>
+              {session ?
+                <Link href="/cart" className="mr-8">
+                  <Cart />
+                </Link>
+                :
+                <Link href="/signin" className="mr-8">
+                  <Cart />
+                </Link>
+                }
             </div>
           </div>
           <div className="mt-20 w-full">{children}</div>
