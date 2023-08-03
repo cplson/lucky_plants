@@ -75,7 +75,7 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
   const content = mode === "register" ? registerContent : signinContent;
 
   return (
-    <Card className="max-w-2xl mx-8 mt-0 md:mx-auto">
+    <Card className="max-w-2xl sm:mx-8 mt-0 md:mx-auto">
       <div className="w-full flex flex-col items-center">
         <div className="text-center">
           <h2 className="text-2xl mb-0">{content.header}</h2>
@@ -154,18 +154,18 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
           </div>
 
           <div className="flex items-center justify-between mt-8">
-            <div>
+            <div className="w-1/2">
               <span>
                 <Link
                   href={content.linkUrl}
-                  className="text-blue-600 font-bold"
+                  className="text-blue-600 font-bold text-sm sm:text-md"
                 >
                   {content.linkText}
                 </Link>
               </span>
             </div>
-            <div>
-              <button className="text-xl font-medium px-4 py-2 rounded-3xl text-blue-700 border-2 border-blue-700 hover:border-blue-500 focus:border-blue-500 hover:text-blue-500 focus:text-blue-500">
+            <div className="w-auto">
+              <button className="sm:text-xl font-medium px-4 py-2 rounded-3xl text-blue-700 border-2 border-blue-700 hover:border-blue-500 focus:border-blue-500 hover:text-blue-500 focus:text-blue-500">
                 {content.buttonText}
               </button>
             </div>
