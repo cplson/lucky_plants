@@ -15,9 +15,12 @@ export default function DropdownMenu() {
   const turnInactive = () => {
     setIsActive(false)
   }
+  const toggleInactive = () => {
+    setIsActive(!isActive)
+  }
   return (
     <>
-      <div className="relative z-30" onMouseLeave={turnInactive} onClick={turnInactive}>
+      <div className="relative z-30" onMouseLeave={turnInactive} onClick={toggleInactive}>
         <button className={clsx("mr-12 border-2 border-black/0", isActive && ' border-black/100 rounded-lg')} onMouseOver={turnActive} >
           {isActive ? (
             <X width={"40"} height={"40"}/>
