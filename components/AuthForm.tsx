@@ -9,7 +9,6 @@ import Link from "next/link";
 import { signIn } from "next-auth/react";
 import GithubAuthBtn from "./GithubAuthBtn";
 import GoogleAuthBtn from "./GoogleAuthBtn";
-import ClearUsersBtn from "./ClearUsersBtn";
 
 // Content for register page
 const registerContent = {
@@ -173,7 +172,6 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
           </div>
         </form>
       </div>
-      <ClearUsersBtn />
     </Card>
   );
 }
