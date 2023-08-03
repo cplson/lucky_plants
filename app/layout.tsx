@@ -8,6 +8,8 @@ import DropdownMenu from "@/components/DropdownMenu";
 
 import AuthProviders from "./context/AuthProvider";
 import SignIOBtn from "@/components/SignIOBtn";
+import { getServerSession } from "next-auth";
+import options from "./api/auth/[...nextauth]/options";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -31,7 +33,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  
+  const session = await getServerSession(options)
 
   return (
     <html
@@ -56,9 +58,15 @@ export default async function RootLayout({
               </div>
               {/* CART */}
               <div className='flex items-center'>
+                {session ?
                 <Link href="/cart" className="mr-8">
                   <Cart />
                 </Link>
+                :
+                <Link href="/signin" className="mr-8">
+                  <Cart />
+                </Link>
+                }
                 <SignIOBtn />
               </div>
             </div>
