@@ -19,10 +19,10 @@ export default function GoogleAuthBtn() {
       <button
         onClick={googleSignin}
         type="submit"
-        className="flex px-6 py-4 my-2 border-2 border-gray-300 rounded-lg"
+        className="flex px-6 py-4 my-2 border-2 border-gray-300 rounded-lg items-center max-w-xs"
       >
         <img
-          className="mr-6"
+          className="mr-4 sm:mr-6"
           loading="lazy"
           height="24"
           width="24"
@@ -36,7 +36,7 @@ export default function GoogleAuthBtn() {
           id="provider-logo-dark"
           src="https://authjs.dev/img/providers/google.svg"
         /> */}
-        <span>Sign in with Google</span>
+        <span className="">Google Signin</span>
       </button>
     </>
     // </form>

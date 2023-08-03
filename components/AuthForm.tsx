@@ -80,17 +80,19 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
         <div className="text-center">
           <h2 className="text-2xl mb-0">{content.header}</h2>
         </div>
-        { mode === 'signin' &&
-        <>
-        <GithubAuthBtn />
-        <GoogleAuthBtn />
-        <div className="mt-4 flex items-center justify-center w-full">
-          <hr className="w-1/4" />
-          <p className="text-lg text-gray-600 mx-4">or</p>
-          <hr className="w-1/4" />
-        </div>
-        </>
-        }
+        {mode === "signin" && (
+          <>
+            <div className="max-w-1/2">
+              <GithubAuthBtn />
+              <GoogleAuthBtn />
+            </div>
+            <div className="mt-4 flex items-center justify-center w-full">
+              <hr className="w-1/4" />
+              <p className="text-lg text-gray-600 mx-4">or</p>
+              <hr className="w-1/4" />
+            </div>
+          </>
+        )}
         <p className="text-md text-black/40 mx-auto my-2">
           {content.subheader}
         </p>
