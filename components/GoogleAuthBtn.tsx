@@ -19,7 +19,7 @@ export default function GoogleAuthBtn() {
       <button
         onClick={googleSignin}
         type="submit"
-        className="flex px-6 py-4 border-2 border-gray-300 rounded-lg"
+        className="flex px-6 py-4 my-2 border-2 border-gray-300 rounded-lg"
       >
         <img
           className="mr-6"

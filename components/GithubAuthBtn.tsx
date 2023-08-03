@@ -12,7 +12,7 @@ export default function GithubAuthBtn() {
       <button
         onClick={githubSignin}
         type="submit"
-        className="px-6 py-4 border-2 border-gray-300 rounded-lg"
+        className="px-6 py-4 my-2 border-2 border-gray-300 rounded-lg"
       >
         <div className="flex">
           <img

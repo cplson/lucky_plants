@@ -46,7 +46,7 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
 
       try {
         if (mode === "register") {
-          await register(formState)
+          await register(formState);
           await signIn("credentials", {
             email: formState.email,
             password: formState.password,
@@ -77,18 +77,24 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
 
   return (
     <Card className="max-w-2xl mx-8 mt-0 md:mx-auto">
-      <div className="w-full flex flex-col">
+      <div className="w-full flex flex-col items-center">
         <div className="text-center">
-          <h2 className="text-2xl mb-2">{content.header}</h2>
+          <h2 className="text-2xl mb-0">{content.header}</h2>
         </div>
+        { mode === 'signin' &&
+        <>
         <GithubAuthBtn />
         <GoogleAuthBtn />
-        <div className="mt-4 flex items-center justify-center">
+        <div className="mt-4 flex items-center justify-center w-full">
           <hr className="w-1/4" />
           <p className="text-lg text-gray-600 mx-4">or</p>
           <hr className="w-1/4" />
         </div>
-        <p className="text-md text-black/40 mx-auto mt-2">{content.subheader}</p>
+        </>
+        }
+        <p className="text-md text-black/40 mx-auto my-2">
+          {content.subheader}
+        </p>
 
         <form onSubmit={handleSubmit} className="pb-10 pt-4 w-full">
           {mode === "register" && (
@@ -167,7 +173,7 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
           </div>
         </form>
       </div>
-    
+      <ClearUsersBtn />
     </Card>
   );
 }
